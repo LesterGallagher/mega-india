@@ -1,0 +1,27 @@
+.root {
+    background-color: #69be5d;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    color: #fff;
+    justify-content: center;
+    flex-direction: column;
+    display: flex;
+    padding: 0 20px;
+    padding-bottom: 70px;
+}
+
+.alignCenter {
+    margin: auto;
+    width: 100%;
+}
+
+.img {
+    max-width: 50vw;
+}
+
+.list {
+    max-width: 500px;
+}

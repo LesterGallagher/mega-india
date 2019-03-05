@@ -1,0 +1,13 @@
+.svg {
+    height: 1.3em;
+    width: 1.3em;
+    overflow: visible;
+}
+
+.svg .middleBar {
+    transition: transform 300ms ease;
+}
+
+.svg:hover .middleBar {
+    transform: translate(200px, 0);
+}

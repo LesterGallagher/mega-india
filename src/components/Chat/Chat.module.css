@@ -1,0 +1,33 @@
+.root {
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    background: #efefef;
+}
+
+.root ons-progress-bar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 1000;
+    transition: opacity 400ms ease;
+}
+
+.overlappingLoader {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #eee;
+    position: fixed;
+}
+
+.overlappingLoader ons-progress-circular {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

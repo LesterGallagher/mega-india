@@ -1,0 +1,13 @@
+.root {
+    text-align: center;
+    background-color: #63a0b5;
+}
+
+.alignCenter {
+    margin: auto;
+    width: 100%;
+}
+
+.img {
+    max-width: 50vw;
+}

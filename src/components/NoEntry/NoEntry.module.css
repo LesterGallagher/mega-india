@@ -1,0 +1,28 @@
+.root {
+    text-align: center;
+}
+
+.alignCenter {
+    margin: auto;
+    width: 100%;
+}
+
+.img {
+    max-width: 50vw;
+}
+
+.figure {
+    border-radius: 50%;
+    padding: 0;
+    margin: 10px;
+    display: inline-block;
+    position: relative;
+    z-index: 10;
+}
+
+
+/* .lightBgCard {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px 20px;
+    border-radius: 8px;
+} */

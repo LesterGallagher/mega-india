@@ -1,0 +1,55 @@
+.root {
+    background-color: #ec6e08;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    color: #fff;
+    justify-content: center;
+    flex-direction: column;
+    display: flex;
+    padding-bottom: 70px;
+}
+
+.alignCenter {
+    margin: auto;
+    width: 100%;
+}
+
+.img {
+    max-width: 50vw;
+}
+
+.figure {
+    border-radius: 50%;
+    padding: 0;
+    margin: 10px;
+    display: inline-block;
+    position: relative;
+    z-index: 10;
+}
+
+.figure::after {
+    content: "";
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    right: -8px;
+    bottom: -8px;
+    border: 15px solid #e4985a;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.alignMiddle {
+    margin-top: 10px;
+}
+
+
+
+/* .lightBgCard {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px 20px;
+    border-radius: 8px;
+} */

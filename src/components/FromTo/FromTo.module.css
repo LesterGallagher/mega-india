@@ -1,0 +1,18 @@
+.truckIcon ons-icon {
+    font-size: 5em;
+}
+
+.fromTo {
+    text-align: center;
+}
+
+.fromTo ons-input {
+    min-width: 100px;
+    max-width: calc(100% - 30px);
+}
+
+.searchBar {
+    display: inline-block;
+    margin-left: 3px;
+}
+

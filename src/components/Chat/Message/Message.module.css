@@ -1,0 +1,81 @@
+.root {
+    
+}
+
+.message {
+    padding: 10px;
+    position: relative;
+    display: block;
+    clear: both;
+}
+
+.message::after {
+    content: "";
+    clear: both;
+    display: block;
+}
+
+.contentWrapper {
+    padding: 10px;
+    color: #fff;
+    font-size: 1.2em;
+    border-radius: 15px;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    left: 60px;
+    max-width: 70%;
+    word-break: break-word;
+}
+
+.contentWrapper::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.content {
+    float: left;
+}
+
+.avatar {
+    height: 100%;
+    position: absolute;
+}
+
+.avatar img {
+    border-radius: 50%;
+    width: 50px;
+    margin-right: 10px;
+    margin-top: -4px;
+}
+
+.avatar {
+    float: left;
+}
+
+.left .contentWrapper {
+    float: left;
+}
+
+.right .contentWrapper {
+    float: right;
+    left: 0;
+}
+
+.timestamp {
+    clear: both;
+    float: right;
+    margin-left: 15px;
+    vertical-align: bottom;
+    height: 15px;
+    opacity: .7;
+    font-size: 0.7em;
+}
+
+.name {
+    display: block;
+    margin-left: 70px;
+    margin-bottom: 3px;
+    color: #333;
+}

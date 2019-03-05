@@ -1,0 +1,47 @@
+.pageLoader {
+    width: 150px;
+    height: 150px;
+    position: relative;
+}
+
+.pageLoader circle {
+    fill: none;
+    stroke-width: 5;
+    stroke-linecap: round;
+    animation-name: loader;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    transform-origin: center center;
+}
+
+.pageLoader circle:nth-child(1) {
+    stroke: #ffc114;
+    stroke-dasharray: 50;
+    animation-delay: -0.2s;
+}
+
+.pageLoader circle:nth-child(2) {
+    stroke: #ff5248;
+    stroke-dasharray: 100;
+    animation-delay: -0.4s;
+}
+
+.pageLoader circle:nth-child(3) {
+    stroke: #19cdca;
+    stroke-dasharray: 180;
+    animation-delay: -0.6s;
+}
+
+.pageLoader circle:nth-child(4) {
+    stroke: #4e88e1;
+    stroke-dasharray: 350;
+    stroke-dashoffset: -100;
+    animation-delay: -0.8s;
+}
+
+@keyframes loader {
+    50% {
+        transform: rotate(360deg);
+    }
+}

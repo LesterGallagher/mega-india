@@ -1,0 +1,9 @@
+
+.root {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.root .lazy-list {
+    height: 100%;
+}

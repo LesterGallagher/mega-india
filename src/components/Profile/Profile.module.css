@@ -1,0 +1,61 @@
+.root {
+}
+
+.banner {
+    text-align: center;
+    padding: 20px;
+    padding-bottom: 60px;
+}
+
+.avatar {
+    height: 200px;
+    border-radius: 50%;
+    transition: opacity 200ms ease;
+}
+
+.displayName {
+    color: #fff;
+}
+
+.avatarOverlay {
+    position: relative;
+    display: inline-block;
+}
+
+.avatarOverlay ons-fab {
+    right: 7px;
+    top: 7px;
+}
+
+.cardWrapper {
+    position: relative;
+    top: -48px;
+}
+
+.cardInner {
+    
+}
+
+.cardInner::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.profileStat {
+    float: left;
+    width: 33.33%;
+    text-align: center;
+}
+
+.editDisplayNameDialog {
+    display: block;
+}
+
+.displayNameEditInput input {
+    color: #333;
+}
+
+.displayNameEditInput span {
+    color: #ec6e08;
+}
