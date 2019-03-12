@@ -1,50 +1,8 @@
 import { EventEmitter } from "events";
 import { authenticate, getCurrentUser, isLoggedIn, firebaseReady } from "../lib/authentication";
-
 import { getProfileImage } from "../lib/user";
-
-export const getUserObserver = async (uid) => {
-    const firebase = await firebaseReady;
-    return firebase.database().ref(`/users/${uid}`);
-};
-
-export const checkIfUserDataExists = uid => {
-    return new Promise((resolve, reject) => {
-        firebaseReady.then(firebase => {
-            const ref = firebase.database().ref(`/users/${uid}`);
-            ref.once('value', function (snapshot) {
-                return resolve(snapshot.val() !== null);
-            }, reject);
-        }).catch(reject);
-    });
-};
-
-const setUserData = (uid, userData, postFix) => {
-    return new Promise((resolve, reject) => {
-        firebaseReady.then(firebase => {
-            const ref = firebase.database().ref(`/users/${uid}/${postFix}`);
-            ref.set(userData);
-        }).catch(reject);
-    });
-};
-
-export const setPublicUserData = (uid, userData) => {
-    console.log('setting public data');
-    return setUserData(uid, userData, 'public');
-};
-
-export const setPrivateUserData = (uid, userData) => {
-    return setUserData(uid, userData, 'private');
-};
-
-export const getUserDataRef = uid => {
-    return new Promise((resolve, reject) => {
-        firebaseReady.then(firebase => {
-            const ref = firebase.database().ref(`/users/${uid}`);
-            resolve(ref);
-        }).catch(reject);
-    });
-}
+import UserStore from "./UserStore";
+import firebase from 'firebase/app';
 
 class AuthStore extends EventEmitter {
     constructor() {
@@ -73,11 +31,13 @@ class AuthStore extends EventEmitter {
 
     getUserInfo = async () => {
         if (this.userDataObserver) this.userDataObserver.off();
+        await firebaseReady;
         this.photoURL = await getProfileImage(this.user.uid);
-        this.userDataObserver = await getUserObserver(this.user.uid);
-        const userDataExists = await checkIfUserDataExists(this.user.uid);
+        this.userDataObserver = firebase.database().ref(`/users/${this.user.uid}`)
+        const userDataExists = await UserStore.checkIfUserDataExists(this.user.uid);
         if (userDataExists === false) {
-            await setPublicUserData(this.user.uid, {
+            const ref = firebase.database().ref(`/users/${this.user.uid}/public`);
+            await ref.set({
                 displayName: this.user.displayName || 'Anonymous'
             });
         }

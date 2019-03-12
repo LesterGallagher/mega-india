@@ -11,7 +11,7 @@ class Welcome extends Component {
             <div className={styles.alignCenter}>
                 <div className={styles.lightBgCard}>
                 <h1>{config.name}</h1>
-                <p>Chat met andere Oosterhouters</p>
+                <p style={{ margin: 'auto', width: '50%', minWidth: 300, maxWidth: '100%' }}>De makkelijkste plek om bezorgingen te adverteren of een centje bij te verdienen als bezorger.</p>
                 </div>
                 <p>&nbsp;</p>
                 <figure className={styles.figure}>

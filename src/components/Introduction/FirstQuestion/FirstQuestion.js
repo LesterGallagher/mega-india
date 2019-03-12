@@ -7,22 +7,22 @@ import { withRouter } from 'react-router-dom';
 class FirstQuestion extends Component {
 
     inCorrect = () => {
-        this.props.history.replace('/no-entry?antwoord="Eten"');
+        this.props.history.push('/no-entry?antwoord="Eten"');
     }
 
     render() {
         return (<CarouselItem className={styles.root}>
             <div className={styles.alignCenter}>
-                <h1>Ben jij een echte Oosterhouter?</h1>
-                <p>Beantwoord de volgende vragen goed en je krijgt toegang to de app.</p>
+                <h1>Wat wil je doen?</h1>
                 <p>&nbsp;</p>
-                <h3>Wat doen we in Oosterhout altijd het eerst?</h3>
+                <p>Waar ben je in geïnteresseerd?</p>
+                <p>&nbsp;</p>
                 <List className={styles.list}>
                     <ListHeader>Antwoorden</ListHeader>
-                    <ListItem onClick={this.inCorrect} tappable>Onze voeten vegen</ListItem>
-                    <ListItem onClick={this.props.next} tappable>Eten</ListItem>
-                    <ListItem onClick={this.inCorrect} tappable>Midgetgolfen</ListItem>
-                    <ListItem onClick={this.inCorrect} tappable>Een station bouwen</ListItem>
+                    <ListItem onClick={this.props.next} tappable>Duurzamer Adverteren</ListItem>
+                    <ListItem onClick={this.props.next} tappable>Duurzamer bezorgen</ListItem>
+                    <ListItem onClick={this.props.next} tappable>Beide</ListItem>
+                    <ListItem onClick={this.props.next} tappable>Iets anders/Weet ik nog niet</ListItem>
                 </List>
             </div>
         </CarouselItem>);

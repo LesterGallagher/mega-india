@@ -1,28 +1,35 @@
 import React, { Component } from 'react';
 import styles from './RouteDetail.module.css';
 import { firebaseReady } from '../../lib/authentication';
+import { Route } from 'react-router-dom';
 import firebase from 'firebase/app';
-import * as utils from '../../lib/geo';
-import { ListItem, List, ListHeader, ListTitle, Icon, Fab, Page, Card } from 'react-onsenui';
-import config from '../../config';
+import { Page, Card, Dialog } from 'react-onsenui';
 import { format } from 'timeago.js';
-import { withRouter } from 'react-router-dom';
 import ToolbarNormal from '../ToolbarNormal/ToolbarNormal';
 import Loading from '../Loading/Loading';
 import RouteInfo from '../RouteInfo/RouteInfo';
 import NewRouteOrderMapContainer from '../NewRouteOrderMapContainer/NewRouteOrderMapContainer';
 import RouteOrderDeliveryOfferOverview from '../RouteOrderDeliveryOfferOverview/RouteOrderDeliveryOfferOverview';
+import UserCard from '../UserCard/UserCard';
+import AcceptedDeliveryOffer from '../AcceptedDeliveryOffer/AcceptedDeliveryOffer';
 
 class RouteDetail extends Component {
     constructor(props) {
         super(props);
         this.id = props.match.params.id;
         this.state = {
+            acceptanceDialog: false
         };
     }
 
     componentDidMount = async () => {
-        const doc = await firebase.firestore().collection('routeorders').doc(this.id).get();
+        this.unsubscribe = firebase.firestore()
+            .collection('routeorders')
+            .doc(this.id)
+            .onSnapshot(this.onSnapshot);
+    }
+
+    onSnapshot = doc => {
         const data = doc.data();
         data.id = doc.id;
         this.setState({
@@ -46,6 +53,7 @@ class RouteDetail extends Component {
     }
 
     componentWillUnmount() {
+        this.unsubscribe();
     }
 
     render() {
@@ -53,7 +61,7 @@ class RouteDetail extends Component {
         const routeOrder = this.state.routeOrder;
         return (
             <Page renderToolbar={() => <ToolbarNormal name={routeOrder.title} />}>
-                <h3>Route</h3>
+                <h2 style={{ margin: 10 }}>Route</h2>
                 <Card>
                     <p className={styles.fromTo}>Van {routeOrder.start_address} naar {routeOrder.end_address}</p>
                     <p className={styles.summary}>{routeOrder.summary}</p>
@@ -70,9 +78,11 @@ class RouteDetail extends Component {
                 <Card>
                     <RouteInfo directions={this.state.directions} />
                 </Card>
-                <Card>
-                    <RouteOrderDeliveryOfferOverview routeOrder={routeOrder} />
-                </Card>
+                {routeOrder.acceptedRouteOrderOfferId
+                    ? <AcceptedDeliveryOffer routeOrder={routeOrder} />
+                    : <Card>
+                        <RouteOrderDeliveryOfferOverview routeOrder={routeOrder} />
+                    </Card>}
             </Page>
         );
     }

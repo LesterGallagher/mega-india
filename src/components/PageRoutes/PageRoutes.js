@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Route, Link, Switch } from 'react-router-dom';
 import NewRouteOrder from '../NewRouteOrder/NewRouteOrder';
 import Home from '../Home/Home';
 import RoutesList from '../RoutesList/RoutesList';
@@ -8,6 +8,8 @@ import RouteDetail from '../RouteDetail/RouteDetail';
 import PublicChat from '../PublicChat/PublicChat';
 import PersonalChat from '../PersonalChat/PersonalChat';
 import PersonalChatsOverview from '../PersonalChatsOverview/PersonalChatsOverview';
+import NotFound from '../NotFound/NotFound';
+import RouteOfferFlowDiagram from '../RouteOfferFlowDiagram/RouteOfferFlowDiagram';
 
 class PageRoutes extends Component {
     constructor(props) {
@@ -15,7 +17,7 @@ class PageRoutes extends Component {
         this.state = {}
     }
     render() {
-        return (<div>
+        return (<Switch>
             <Route path="/" component={Home} exact />
             <Route path="/new-route" component={NewRouteOrder} exact />
             <Route path="/routes-list" component={RoutesOffersOverview} exact />
@@ -24,14 +26,15 @@ class PageRoutes extends Component {
             <Route
                 exact
                 path="/chats/public/*"
-                render={props => <PublicChat {...props} />}/>
+                render={props => <PublicChat {...props} />} />
             <Route
                 exact
                 path="/chats/personal/*"
-                render={props => <PersonalChat {...props} />}/>
+                render={props => <PersonalChat {...props} />} />
 
-            
-        </div>);
+            <Route exact path="/flow/routeorder" component={RouteOfferFlowDiagram} />
+            <Route component={NotFound} />
+        </Switch>);
     }
 }
 

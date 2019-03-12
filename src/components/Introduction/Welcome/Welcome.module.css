@@ -37,8 +37,8 @@
     left: -8px;
     right: -8px;
     bottom: -8px;
-    border: 15px solid #e4985a;
-    border-radius: 50%;
+    /* border: 15px solid #e4985a; */
+    /* border-radius: 50%; */
     z-index: 1;
 }
 

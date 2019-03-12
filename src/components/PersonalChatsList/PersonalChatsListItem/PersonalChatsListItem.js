@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 
 const greyImgURI = 'data:image/png;base64,iVBORw0KGgoAAAAN'
     + 'SUhEUgAAADIAAAAyAQMAAAAk8RryAAAAA1BMVEWZmZl86KQWAAA'
-    + 'ADklEQVQY02NgGAWDCQAAAZAAAcWb20kAAAAASUVORK5CYII='
+    + 'ADklEQVQY02NgGAWDCQAAAZAAAcWb20kAAAAASUVORK5CYII=';
 
 class PersonalChatsListItem extends Component {
     constructor(props) {
@@ -17,25 +17,19 @@ class PersonalChatsListItem extends Component {
     }
 
     componentDidMount = async () => {
-        this._ismounted = true
         const chatItem = await this.props.personalChatPromise;
-        if (this._ismounted) {
-            this.setState({
-                chatItem: chatItem,
-                chatItemLoaded: true
-            });
-        }
+        this.setState({
+            chatItem: chatItem,
+            chatItemLoaded: true
+        });
         const profileImage = await getProfileImage(chatItem.uid);
-        if (this._ismounted) {
-            this.setState({
-                profileImage: profileImage,
-                profileImageLoaded: true
-            });
-        }
+        this.setState({
+            profileImage: profileImage,
+            profileImageLoaded: true
+        });
     }
 
     componentWillUnmount() {
-        this._ismounted = false;
     }
 
     onClick = async () => {
@@ -50,7 +44,6 @@ class PersonalChatsListItem extends Component {
         const src = this.state.profileImage || greyImgURI;
         const alt = (userPublicData.displayName || 'User') + ' avatar';
 
-        if (chatItem) console.log('chatItem', chatItem);
         return (
             <ListItem tappable
                 modifier="chevron"

@@ -24,3 +24,9 @@ code {
 .menu-toolbar-btn {
     line-height: 68px;
 }
+
+.RouteDetailOfferAcceptanceDialog .dialog {
+    width: 600px;
+    max-width: 90%;
+    height: 470px;
+}

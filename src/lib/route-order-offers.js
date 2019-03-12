@@ -28,3 +28,17 @@ const notifyOtherUser = async (price, routeOrder) => {
     thread.threadObserver.push(newMessage);
 }
 
+
+export const notifyDeliveryGuyAccepted = async (routeOrder, routeOrderOffer) => {
+    const chatMeta = await PersonalChatStore.getChatMetaItem(routeOrderOffer.senderUid);
+    const thread = await PersonalChatStore.getChatThread(chatMeta);
+    console.log(thread);
+    const newMessage = {
+        content: `💰 \${displayName} heeft je aanbod van ${routeOrderOffer.price} euro om een lading te bezorgen geaccepteerd. \${routeOrderLink:${routeOrder.id}}` ,
+        senderName: getDisplayName(AuthStore.user),
+        senderUid: AuthStore.user.uid,
+        timestamp: Date.now()
+    };
+    thread.threadObserver.push(newMessage);
+}
+

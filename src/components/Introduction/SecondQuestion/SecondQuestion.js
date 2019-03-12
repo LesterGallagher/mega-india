@@ -7,22 +7,22 @@ import { withRouter } from "react-router-dom";
 class SecondQuestion extends Component {
 
     inCorrect = () => {
-        this.props.history.replace('/no-entry?antwoord="0162"');
+        this.props.history.push('/no-entry?antwoord=' + encodeURIComponent('Wij bieden alleen onze diensten') + '&antwoord2=' + encodeURIComponent('aan in Nederland.'));
     }
 
     render() {
         return (<CarouselItem className={styles.root}>
             <div className={styles.alignCenter}>
-                <h1>Goed gedaan!</h1>
+                <h1>Waar wil je gaan bezorgen of adverteren?</h1>
                 <p>&nbsp;</p>
-                <h3>Wat is het netnummer van Oosterhout</h3>
+                <p>Deze app werkt alleen in Nederland.</p>
                 <p>&nbsp;</p>
                 <List className={styles.list}>
                     <ListHeader>Antwoorden</ListHeader>
-                    <ListItem onClick={this.inCorrect} tappable>0481</ListItem>
-                    <ListItem onClick={this.props.next} tappable>0162</ListItem>
-                    <ListItem onClick={this.inCorrect} tappable>024</ListItem>
-                    <ListItem onClick={this.inCorrect} tappable>0168</ListItem>
+                    <ListItem onClick={this.props.next} tappable>In Nederland</ListItem>
+                    <ListItem onClick={this.props.next} tappable>In de Randstad</ListItem>
+                    <ListItem onClick={this.props.next} tappable>Weet ik nog niet</ListItem>
+                    <ListItem onClick={this.inCorrect} tappable>In het buitenland</ListItem>
                 </List>
             </div>
         </CarouselItem>);
