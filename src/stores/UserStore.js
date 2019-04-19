@@ -1,8 +1,5 @@
 import { EventEmitter } from "events";
-import { authenticate, getCurrentUser, isLoggedIn, firebaseReady } from "../lib/authentication";
-
-import { getProfileImage } from "../lib/user";
-import AuthStore from "./AuthStore";
+import { firebaseReady } from "../lib/authentication";
 
 class UserStore extends EventEmitter {
     constructor() {

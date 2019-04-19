@@ -3,6 +3,7 @@ import { authenticate, getCurrentUser, isLoggedIn, firebaseReady } from "../lib/
 import { getProfileImage } from "../lib/user";
 import UserStore from "./UserStore";
 import firebase from 'firebase/app';
+import ons from 'onsenui';
 
 class AuthStore extends EventEmitter {
     constructor() {
@@ -10,18 +11,62 @@ class AuthStore extends EventEmitter {
 
         this.isLoggedin = false;
         this.isReady = false;
-        this.readyPromise = getCurrentUser().then(async user => {
-            isLoggedIn().then(async loggedIn => {
-                this.user = user;
-                this.isLoggedin = loggedIn;
-                this.isReady = true;
-                if (this.user) await this.getUserInfo();
-                this.emit('change');
-            });
-        });
+        this.readyPromise = this.getUser();
+    }
+
+    loginWithEmailPassword = async (email, password) => {
+        try {
+            await firebase.auth().signInWithEmailAndPassword(email, password);
+        } catch (error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // ...
+            ons.notification.alert('Unable to login: ' + errorMessage);
+        }
+        await this.getUser();
+
+    }
+
+    registerWithEmailPassword = async (email, password) => {
+        try {
+            await firebase.auth().createUserWithEmailAndPassword(email, password);
+        } catch (error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // ...
+            ons.notification.alert('Unable to login: ' + errorMessage);
+        }
+        await this.getUser();
+    }
+
+    signInAnonymously = async () => {
+        try {
+            await firebase.auth().signInAnonymously();
+        } catch (error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // ...
+            ons.notification.alert('Unable to sign in: ' + errorMessage);
+        }
+        await this.getUser();
+    }
+
+    getUser = async () => {
+        const user = await getCurrentUser();
+        if (!user) console.warn('user is falsy after getting the current user...', user);
+        const loggedIn = await isLoggedIn();
+        this.user = user;
+        this.isLoggedin = loggedIn;
+        this.isReady = true;
+        if (this.user) await this.getUserInfo();
+        this.emit('change', { action: 'GET_USER' });
     }
 
     authenticate = (provider) => authenticate(provider).then(async user => {
+        if (!user) console.warn('user is falsy after authenticating...', user);
         this.isLoggedin = true;
         this.user = user;
         await this.getUserInfo();

@@ -3,9 +3,10 @@ import { Card, Page } from 'react-onsenui';
 import './PersonalChatsOverview.css';
 import PersonalChatsList from '../PersonalChatsList/PersonalChatsList';
 import PersonalChatStore from '../../stores/PersonalChatStore';
-import { firebaseReady, isLoggedIn } from '../../lib/authentication';
+import { firebaseReady } from '../../lib/authentication';
 import PersonalChatListItem from '../../lib/chats/personal-chat-list-item';
 import ToolbarNormal from '../ToolbarNormal/ToolbarNormal';
+import AuthStore from '../../stores/AuthStore';
 
 class PersonalChatsOverview extends Component {
     constructor(props) {
@@ -17,7 +18,7 @@ class PersonalChatsOverview extends Component {
 
     componentDidMount = async () => {
         await firebaseReady;
-        await isLoggedIn;
+        await AuthStore.readyPromise;
         const personalChats = await PersonalChatStore.getAllPersonalChats();
         this.setState({
             personalChatPromises: personalChats.map(chatInfo => PersonalChatListItem.create(chatInfo))

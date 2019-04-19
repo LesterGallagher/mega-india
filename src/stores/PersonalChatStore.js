@@ -1,5 +1,5 @@
 import { EventEmitter } from "events";
-import { firebaseReady, isLoggedIn } from "../lib/authentication";
+import { firebaseReady } from "../lib/authentication";
 import { ChatMeta } from "../lib/chats/chat-meta";
 import { ChatThread } from "../lib/chats/chat-thread";
 import AbctractChatStore from "./AbstractChatStore";
@@ -54,7 +54,6 @@ class PersonalChatStore extends AbctractChatStore {
             "slug": otherUidSlug,
             "id": `${uid1}/${uid2}`
         };
-
     }
 
     getChatsMetas = async () => {
@@ -86,7 +85,8 @@ class PersonalChatStore extends AbctractChatStore {
 
     getAllPersonalChats = async () => {
         const firebase = await firebaseReady;
-        const loggedIn = await isLoggedIn();
+        await AuthStore.readyPromise;
+        const loggedIn = AuthStore.isLoggedin;
         if (!loggedIn) return null;
         const snapshot = await firebase.database()
             .ref(`/users/${AuthStore.user.uid}/personalchatswithusers`)
@@ -101,7 +101,8 @@ class PersonalChatStore extends AbctractChatStore {
 
     trySetChatToUserData = async (otherUserUid) => {
         const firebase = await firebaseReady;
-        const loggedIn = await isLoggedIn();
+        await AuthStore.readyPromise;
+        const loggedIn = AuthStore.isLoggedin;
         if (!loggedIn) return false;
         const snapshot = await firebase.database()
             .ref(`/users/${AuthStore.user.uid}/personalchatswithusers/${otherUserUid}`)
