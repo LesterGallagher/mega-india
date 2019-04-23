@@ -1,0 +1,10 @@
+---
+label: Test
+hide_body: false
+fields:
+- type: text
+  name: title
+  label: Title
+- type: textarea
+  name: description
+  label: Description

@@ -9,7 +9,7 @@ sections:
   label: Documenten
   create: all
   match: "**/*"
-  new_doc_ext: ".json"
+  new_doc_ext: json
 upload_dir: uploads
 public_path: "/uploads"
 front_matter_path: ''
@@ -20,6 +20,8 @@ build:
   publish_command: npm run deploy
   preview_env:
   - JEKYLL_ENV=staging
+  publish_env:
+  - JEKYLL_ENV=production
   preview_output_directory: _site
   output_directory: build
   instant_preview_command: bundle exec jekyll serve --drafts --unpublished --future
