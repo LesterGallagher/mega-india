@@ -10,9 +10,6 @@ sections:
   create: all
   match: "**/*"
   new_doc_ext: json
-- type: document
-  path: "./public/data/test.json"
-  label: Test
 - type: jekyll-pages
   label: Pages
   create: all
