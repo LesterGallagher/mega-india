@@ -10,3 +10,5 @@ fields:
   name: description
   label: Description
   description: De description
+pages:
+- public/data/test.json
