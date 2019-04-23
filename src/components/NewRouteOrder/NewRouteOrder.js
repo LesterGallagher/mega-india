@@ -8,9 +8,9 @@ import styles from './NewRouteOrder.module.css';
 import config from '../../config';
 import Script from 'react-load-script';
 import RouteInfo from '../RouteInfo/RouteInfo';
-import { RouteOrder, placeRouteOrder } from '../../lib/route-order';
-import { calculateRouteCostsInEuro, routeCostsColor } from '../../lib/RouteCosts';
-import { firebaseReady } from '../../lib/authentication';
+import { RouteOrder, placeRouteOrder } from '../../services/route-order';
+import { calculateRouteCostsInEuro, routeCostsColor } from '../../lib/route-costs';
+import { firebaseReady } from '../../services/authentication';
 import AuthStore from '../../stores/AuthStore';
 
 class NewRouteOrder extends Component {

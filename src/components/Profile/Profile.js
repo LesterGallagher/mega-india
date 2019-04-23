@@ -10,7 +10,7 @@ import { rndId } from '../../helpers/random';
 import loaderSvg from './avatar-loader.svg'
 import { getBase64, generateThumbnail, getBuffer } from '../../lib/files';
 import { uploadProfilePicture, getDisplayName } from '../../lib/user';
-import { firebaseReady } from '../../lib/authentication';
+import { firebaseReady } from '../../services/authentication';
 import firebase from 'firebase/app';
 
 class Profile extends Component {
@@ -94,6 +94,7 @@ class Profile extends Component {
         if (this.state.newUsername.length > 20) return alert('Uw gebruikersnaam kan niet langer zijn de 20 tekens.');
         if (this.state.newUsername.length < 4) return alert('Uw gebruikersnaam moet meer dan 3 tekens hebben.');
         this.setState({ editDisplayNameDialogOpen: false });
+        const uid = AuthStore.user.uid;
         const userRef = firebase.database().ref(`/users/${uid}`);
         console.log(userRef);
         const displayNameRef = userRef.child('/displayName');

@@ -5,8 +5,8 @@ import firebase from 'firebase/app';
 import NotFound from '../NotFound/NotFound';
 import AuthStore from '../../stores/AuthStore';
 import UserCard from '../UserCard/UserCard';
-import { routeCostsColor } from '../../lib/RouteCosts';
-import { notifyDeliveryGuyAccepted } from '../../lib/route-order-offers';
+import { routeCostsColor } from '../../lib/route-costs';
+import { notifyDeliveryGuyAccepted } from '../../services/route-order-offers';
 
 const greyImgURI = 'data:image/png;base64,iVBORw0KGgoAAAAN'
     + 'SUhEUgAAADIAAAAyAQMAAAAk8RryAAAAA1BMVEWZmZl86KQWAAA'

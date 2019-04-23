@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styles from './RouteInfo.component.css';
-import { calculateRouteCostsInEuro, routeCostsColor } from '../../lib/RouteCosts'
+import { calculateRouteCostsInEuro, routeCostsColor } from '../../lib/route-costs'
 
 class RouteInfo extends Component {
     constructor(props) {

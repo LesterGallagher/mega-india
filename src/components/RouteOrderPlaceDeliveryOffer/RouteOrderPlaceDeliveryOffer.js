@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styles from './RouteOrderPlaceDeliveryOffer.module.css';
 import { Input, Button } from 'react-onsenui';
-import { placeRouteOrderOffer } from '../../lib/route-order-offers';
+import { placeRouteOrderOffer } from '../../services/route-order-offers';
 
 class RouteOrderPlaceDeliveryOffer extends Component {
     constructor(props) {

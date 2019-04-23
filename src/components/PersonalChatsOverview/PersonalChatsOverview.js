@@ -3,7 +3,7 @@ import { Card, Page } from 'react-onsenui';
 import './PersonalChatsOverview.css';
 import PersonalChatsList from '../PersonalChatsList/PersonalChatsList';
 import PersonalChatStore from '../../stores/PersonalChatStore';
-import { firebaseReady } from '../../lib/authentication';
+import { firebaseReady } from '../../services/authentication';
 import PersonalChatListItem from '../../lib/chats/personal-chat-list-item';
 import ToolbarNormal from '../ToolbarNormal/ToolbarNormal';
 import AuthStore from '../../stores/AuthStore';

@@ -79,12 +79,12 @@ class Routes extends Component {
                         exact
                         path="/chats/public/*"
                         props={childProps}
-                        render={PublicChat} />
+                        component={PublicChat} />
                     <AuthenticatedRoute
                         exact
                         path="/chats/personal/*"
                         props={childProps}
-                        render={PersonalChat} />
+                        component={PersonalChat} />
                 </AppSplitter>
 
                 <AppliedRoute exact path="/flow/routeorder" component={RouteOfferFlowDiagram} />

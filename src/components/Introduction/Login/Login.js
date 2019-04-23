@@ -6,7 +6,7 @@ import image from './image.png';
 import { withRouter } from 'react-router-dom';
 import { GoogleLoginButton, FacebookLoginButton, TwitterLoginButton } from "react-social-login-buttons";
 import AuthStore from '../../../stores/AuthStore';
-import { firebaseReady } from '../../../lib/authentication';
+import { firebaseReady } from '../../../services/authentication';
 import firebase from 'firebase/app';
 import MyEmailLoginButton from '../../EmailLoginButton/EmailLoginButton';
 import LoginWithEmail from './LoginWithEmail/LoginWithEmail';

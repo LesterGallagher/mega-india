@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styles from './RouteDetail.module.css';
-import { firebaseReady } from '../../lib/authentication';
+import { firebaseReady } from '../../services/authentication';
 import { Route } from 'react-router-dom';
 import firebase from 'firebase/app';
 import { Page, Card, Dialog } from 'react-onsenui';
