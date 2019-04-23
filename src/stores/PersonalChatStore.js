@@ -86,7 +86,7 @@ class PersonalChatStore extends AbctractChatStore {
     getAllPersonalChats = async () => {
         const firebase = await firebaseReady;
         await AuthStore.readyPromise;
-        const loggedIn = AuthStore.isLoggedin;
+        const loggedIn = AuthStore.isAuthenticated;
         if (!loggedIn) return null;
         const snapshot = await firebase.database()
             .ref(`/users/${AuthStore.user.uid}/personalchatswithusers`)
@@ -102,7 +102,7 @@ class PersonalChatStore extends AbctractChatStore {
     trySetChatToUserData = async (otherUserUid) => {
         const firebase = await firebaseReady;
         await AuthStore.readyPromise;
-        const loggedIn = AuthStore.isLoggedin;
+        const loggedIn = AuthStore.isAuthenticated;
         if (!loggedIn) return false;
         const snapshot = await firebase.database()
             .ref(`/users/${AuthStore.user.uid}/personalchatswithusers/${otherUserUid}`)

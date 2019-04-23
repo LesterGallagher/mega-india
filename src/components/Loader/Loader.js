@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { Page, Splitter, SplitterContent, SplitterSide, ProgressCircular } from 'react-onsenui';
-import config from '../../config';
 import styles from './Loader.module.css';
 
-class Loading extends Component {
+class Loader extends Component {
     render() {
         return (
             <svg className={styles.pageLoader}>
@@ -16,4 +14,4 @@ class Loading extends Component {
     }
 }
 
-export default Loading;
+export default Loader;

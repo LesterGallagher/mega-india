@@ -9,8 +9,8 @@ class AuthStore extends EventEmitter {
     constructor() {
         super();
 
-        this.isLoggedin = false;
-        this.isReady = false;
+        this.isAuthenticated = false;
+        this.userHasAuthenticated = false;
         this.readyPromise = this.getUser();
     }
 
@@ -55,19 +55,20 @@ class AuthStore extends EventEmitter {
     }
 
     getUser = async () => {
+        console.log('get user');
         const user = await getCurrentUser();
         if (!user) console.warn('user is falsy after getting the current user...', user);
         const loggedIn = await isLoggedIn();
         this.user = user;
-        this.isLoggedin = loggedIn;
-        this.isReady = true;
+        this.isAuthenticated = loggedIn;
+        this.userHasAuthenticated = true;
         if (this.user) await this.getUserInfo();
         this.emit('change', { action: 'GET_USER' });
     }
 
     authenticate = (provider) => authenticate(provider).then(async user => {
         if (!user) console.warn('user is falsy after authenticating...', user);
-        this.isLoggedin = true;
+        this.isAuthenticated = true;
         this.user = user;
         await this.getUserInfo();
         this.emit('change');
@@ -88,7 +89,7 @@ class AuthStore extends EventEmitter {
         }
         const snapshot = await this.userDataObserver.once('value')
         this.userData = snapshot.val();
-        this.isReady = true;
+        this.userHasAuthenticated = true;
         this.emit('change');
         this.userDataObserver.on('value', this.handleUserDataSnapshot);
     }

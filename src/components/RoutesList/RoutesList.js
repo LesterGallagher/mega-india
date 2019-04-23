@@ -14,8 +14,6 @@ class RoutesList extends Component {
         this.state = {
 
         };
-
-
     }
 
     handleClick = routeOrder => e => {

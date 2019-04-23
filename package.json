@@ -9,7 +9,7 @@
     "jimp": "^0.6.0",
     "material-ui-search-bar": "^0.4.2",
     "onsenui": "^2.10.6",
-    "query-string": "^6.2.0",
+    "query-string": "^6.4.2",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "react-google-maps": "^9.4.5",
@@ -20,6 +20,7 @@
     "react-social-login-buttons": "^2.3.0",
     "react-textarea-autosize": "^7.1.0",
     "react-window-dimensions": "^1.0.2",
+    "redux": "^4.0.1",
     "timeago.js": "^4.0.0-beta.2",
     "webpack-bundle-analyzer": "^3.1.0"
   },

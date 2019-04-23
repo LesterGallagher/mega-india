@@ -1,20 +1,10 @@
-import 'onsenui/css/onsenui.css';
-import 'onsenui/css/onsen-css-components.css';
-import './index.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import 'firebase/app';
-import "firebase/auth";
-import "firebase/storage";
-import "firebase/database";
-import "firebase/firestore";
 import * as serviceWorker from './serviceWorker';
-import ons from 'onsenui';
-import { register } from 'timeago.js';
-import nlLocale from 'timeago.js/lib/lang/nl';
-ons.platform.select('android');
-register('nl', nlLocale);
+import asyncComponent from './components/AsyncComponent/AsyncComponent';
+import Loading from './components/Loading/Loading';
+import './index.css';
+const App = asyncComponent(() => import('./components/App/App'), Loading);
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

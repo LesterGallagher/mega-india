@@ -1,20 +1,19 @@
 import firebase from 'firebase/app';
-import ons from 'onsenui';
+import * as ons from 'onsenui';
+import { deviceReady } from './util';
 
-export const firebaseReady = new Promise((resolve, reject) => {
-    ons.ready(() => {
-        // Initialize Firebase
-        var config = {
-            apiKey: "AIzaSyB_M3x8TONbKzPOyl7RYfZ1cvjZmWVvgv8",
-            authDomain: "megaindia-990a4.firebaseapp.com",
-            databaseURL: "https://megaindia-990a4.firebaseio.com",
-            projectId: "megaindia-990a4",
-            storageBucket: "megaindia-990a4.appspot.com",
-            messagingSenderId: "429451926912"
-        };
-        firebase.initializeApp(config);
-        resolve(firebase);
-    });
+export const firebaseReady = deviceReady.then(() => {
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyB_M3x8TONbKzPOyl7RYfZ1cvjZmWVvgv8",
+        authDomain: "megaindia-990a4.firebaseapp.com",
+        databaseURL: "https://megaindia-990a4.firebaseio.com",
+        projectId: "megaindia-990a4",
+        storageBucket: "megaindia-990a4.appspot.com",
+        messagingSenderId: "429451926912"
+    };
+    firebase.initializeApp(config);
+    return firebase;
 });
 
 export const getCurrentUser = () => firebaseReady.then(firebase => {
@@ -32,8 +31,6 @@ export const getCurrentUser = () => firebaseReady.then(firebase => {
 export const isLoggedIn = () => getCurrentUser().then(user => {
     return !!user;
 })
-
-getCurrentUser().then(tst => console.log('aabccdef', tst));
 
 // default authenticate flow
 export const authenticate = provider => new Promise((resolve, reject) => {

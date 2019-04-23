@@ -127,3 +127,15 @@ export const throttle = (func, limit) => {
 		}
 	};
 };
+
+export const deviceReady = new Promise((resolve, reject) => {
+	if (window.cordova) {
+		// The deviceready event behaves somewhat differently from others. 
+		// Any event handler registered after the deviceready event fires has its callback function called immediately.
+		document.addEventListener('deviceready', resolve);	
+	} else if (window.DOMContentLoaded) {
+		resolve();
+	} else {
+		window.addEventListener('DOMContentLoaded', resolve);
+	}
+});

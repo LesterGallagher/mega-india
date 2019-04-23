@@ -53,7 +53,7 @@ class NewRouteOrder extends Component {
 
         const routeOrder = new RouteOrder(this.state.directions, cost);
         await firebaseReady;
-        if (AuthStore.isLoggedin === false) {
+        if (AuthStore.isAuthenticated === false) {
             alert('Sorry you are not logged in');
             return;
         }
