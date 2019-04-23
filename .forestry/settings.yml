@@ -19,8 +19,6 @@ instant_preview: true
 build:
   preview_command: bundle exec jekyll build --drafts --unpublished --future -d _site
   publish_command: npm run deploy
-  preview_env:
-  - JEKYLL_ENV=staging
   preview_output_directory: build
   output_directory: build
   instant_preview_command: npm run build
