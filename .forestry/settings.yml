@@ -16,7 +16,7 @@ front_matter_path: ''
 use_front_matter_path: false
 file_template: ":filename:"
 build:
-  preview_command: bundle exec jekyll build --drafts --unpublished --future -d _site
+  preview_command: npm run build
   publish_command: npm run deploy
   preview_output_directory: build
   output_directory: build
