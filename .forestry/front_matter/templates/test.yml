@@ -8,3 +8,5 @@ fields:
 - type: textarea
   name: description
   label: Description
+pages:
+- public/data/test.json
