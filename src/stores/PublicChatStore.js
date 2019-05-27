@@ -1,4 +1,4 @@
-import { firebaseReady } from "../lib/authentication";
+import { firebaseReady } from "../services/authentication";
 import { ChatMeta } from "../lib/chats/chat-meta";
 import { ChatThread } from "../lib/chats/chat-thread";
 import AbstractChatStore from "./AbstractChatStore";

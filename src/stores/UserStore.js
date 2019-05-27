@@ -1,5 +1,5 @@
 import { EventEmitter } from "events";
-import { firebaseReady } from "../lib/authentication";
+import { firebaseReady } from "../services/authentication";
 
 class UserStore extends EventEmitter {
     constructor() {

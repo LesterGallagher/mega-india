@@ -3,18 +3,17 @@ import ons from 'onsenui';
 import { register } from 'timeago.js';
 import nlLocale from 'timeago.js/lib/lang/nl';
 import { HashRouter } from 'react-router-dom';
+import '../../lib/firebase';
 import './App.css';
 import AuthStore from '../../stores/AuthStore';
 import PublicChatStore from '../../stores/PublicChatStore';
 import Loading from '../Loading/Loading';
 import Routes from '../Routes/Routes';
 import 'onsenui/css/onsenui.css';
-import 'onsenui/css/onsen-css-components.css';
-import 'firebase/app';
-import "firebase/auth";
-import "firebase/storage";
-import "firebase/database";
-import "firebase/firestore";
+import '../../onsen-css-theme/onsen-css-components.css'
+import { Provider } from 'react-redux';
+import store from '../../store';
+console.log(store);
 
 ons.platform.select('android');
 register('nl', nlLocale);
@@ -56,14 +55,16 @@ class App extends Component {
       userHasAuthenticated: this.state.userHasAuthenticated
     };
 
-    console.log(childProps);
+    console.log('child props', childProps);
 
     return (
-      <div className="App">
-        {this.state.userHasAuthenticated ? <HashRouter>
-          <Routes childProps={childProps} />
-        </HashRouter> : <Loading />}
-      </div>
+      <Provider store={store}>
+        <div className="App">
+          {this.state.userHasAuthenticated ? <HashRouter>
+            <Routes childProps={childProps} />
+          </HashRouter> : <Loading />}
+        </div>
+      </Provider>
     );
   }
 }

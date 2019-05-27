@@ -1,5 +1,5 @@
 import { EventEmitter } from "events";
-import { authenticate, getCurrentUser, isLoggedIn, firebaseReady } from "../lib/authentication";
+import { authenticate, getCurrentUser, isLoggedIn, firebaseReady } from "../services/authentication";
 import { getProfileImage } from "../lib/user";
 import UserStore from "./UserStore";
 import firebase from 'firebase/app';
@@ -52,6 +52,20 @@ class AuthStore extends EventEmitter {
             ons.notification.alert('Unable to sign in: ' + errorMessage);
         }
         await this.getUser();
+    }
+
+    signInWithGoogle = async () => {
+        try {
+            const firebase = await firebaseReady();
+            const provider = new firebase.auth.GoogleAuthProvider();
+            firebase.auth().signInWithRedirect(provider)
+        } catch(error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // ...
+            ons.notification.alert('Unable to login: ' + errorMessage);
+        }
     }
 
     getUser = async () => {

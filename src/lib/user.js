@@ -1,4 +1,4 @@
-import { firebaseReady } from "./authentication";
+import { firebaseReady } from '../services/authentication';
 import AuthStore from "../stores/AuthStore";
 import defaultAvatar from '../images/img_avatar.png';
 

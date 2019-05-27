@@ -1,4 +1,4 @@
-import { firebaseReady } from '../authentication';
+import { firebaseReady } from '../../services/authentication';
 
 export class ChatMeta {
     constructor(title, isLeaf, slug, id) {

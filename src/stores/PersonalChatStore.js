@@ -1,11 +1,11 @@
 import { EventEmitter } from "events";
-import { firebaseReady } from "../lib/authentication";
+import { firebaseReady } from "../services/authentication";
 import { ChatMeta } from "../lib/chats/chat-meta";
 import { ChatThread } from "../lib/chats/chat-thread";
-import AbctractChatStore from "./AbstractChatStore";
+import AbstractChatStore from "./AbstractChatStore";
 import AuthStore from "./AuthStore";
 
-class PersonalChatStore extends AbctractChatStore {
+class PersonalChatStore extends AbstractChatStore {
     constructor() {
         super();
 

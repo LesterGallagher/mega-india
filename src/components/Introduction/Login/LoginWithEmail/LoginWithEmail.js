@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import styles from './LoginWithEmail.module.css';
-import { Page, CarouselItem, Card, Input, Button, Switch } from 'react-onsenui';
+import { Card, Input, Button, Switch } from 'react-onsenui';
 import image from './image.png';
 import MyEmailLoginButton from '../../../EmailLoginButton/EmailLoginButton';
-import firebase from 'firebase/app';
-import ons from 'onsenui';
 import AuthStore from '../../../../stores/AuthStore';
 import Loading from '../../../Loading/Loading';
 
