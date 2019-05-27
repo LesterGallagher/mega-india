@@ -1,0 +1,23 @@
+---
+new_page_extension: md
+auto_deploy: false
+admin_path: 
+webhook_url: 
+sections:
+- type: directory
+  path: public/data
+  label: Documenten
+  create: all
+  match: "**/*"
+  new_doc_ext: json
+upload_dir: uploads
+public_path: "/uploads"
+front_matter_path: ''
+use_front_matter_path: false
+file_template: ":filename:"
+build:
+  preview_command: npm run build
+  publish_command: npm run deploy
+  publish_env:
+  - JEKYLL_ENV=production
+  output_directory: build
