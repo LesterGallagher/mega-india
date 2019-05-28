@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './RouteOrderDeliveryOffers.css';
 import RouteOrderDeliveryOffersItem from '../RouteOrderDeliveryOffersItem/RouteOrderDeliveryOffersItem';
-import firebase from 'firebase/app';
+import firebase from '../../lib/firebase';
 import { List, ListItem } from 'react-onsenui';
 
 class RouteOrderDeliveryOffers extends Component {

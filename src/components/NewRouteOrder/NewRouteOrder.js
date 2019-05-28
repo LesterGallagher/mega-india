@@ -10,8 +10,8 @@ import Script from 'react-load-script';
 import RouteInfo from '../RouteInfo/RouteInfo';
 import { RouteOrder, placeRouteOrder } from '../../services/route-order';
 import { calculateRouteCostsInEuro, routeCostsColor } from '../../lib/route-costs';
-import { firebaseReady } from '../../services/authentication';
 import AuthStore from '../../stores/AuthStore';
+import firebase from '../../lib/firebase';
 
 class NewRouteOrder extends Component {
     constructor(props) {
@@ -52,7 +52,7 @@ class NewRouteOrder extends Component {
         const cost = calculateRouteCostsInEuro(duration.value, distance.value);
 
         const routeOrder = new RouteOrder(this.state.directions, cost);
-        await firebaseReady;
+        await firebase.ready;
         if (AuthStore.isAuthenticated === false) {
             alert('Sorry you are not logged in');
             return;

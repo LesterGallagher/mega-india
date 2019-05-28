@@ -2,21 +2,24 @@ import React, { Component } from 'react';
 import ons from 'onsenui';
 import { register } from 'timeago.js';
 import nlLocale from 'timeago.js/lib/lang/nl';
-import { HashRouter } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import '../../lib/firebase';
+import '../../style/index';
 import './App.css';
 import AuthStore from '../../stores/AuthStore';
 import PublicChatStore from '../../stores/PublicChatStore';
 import Loading from '../Loading/Loading';
 import Routes from '../Routes/Routes';
 import 'onsenui/css/onsenui.css';
-import '../../onsen-css-theme/onsen-css-components.css'
-import { Provider } from 'react-redux';
-import store from '../../store';
-console.log(store);
+import FirebaseContext from '../Firebase';
+import firebase from '../../lib/firebase';
+import { registerLocale, setDefaultLocale } from 'react-datepicker';
+import nl from 'date-fns/locale/nl'
 
 ons.platform.select('android');
 register('nl', nlLocale);
+console.log('nl test', nl);
+
 
 class App extends Component {
 
@@ -58,15 +61,19 @@ class App extends Component {
     console.log('child props', childProps);
 
     return (
-      <Provider store={store}>
-        <div className="App">
-          {this.state.userHasAuthenticated ? <HashRouter>
-            <Routes childProps={childProps} />
-          </HashRouter> : <Loading />}
-        </div>
-      </Provider>
+      <div className="App">
+        {this.state.userHasAuthenticated ? <Router>
+          <Routes childProps={childProps} />
+        </Router> : <Loading />}
+      </div>
     );
   }
 }
 
-export default App;
+export default () => {
+  return (
+    <FirebaseContext.Provider value={firebase}>
+      <App />
+    </FirebaseContext.Provider>
+  );
+}

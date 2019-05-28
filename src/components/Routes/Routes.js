@@ -8,6 +8,10 @@ import AppliedRoute from "../AppliedRoute/AppliedRoute";
 import UnauthenticatedRoute from '../UnauthenticatedRoute/UnauthenticatedRoute';
 import AuthenticatedRoute from '../AuthenticatedRoute/AuthenticatedRoute';
 import asyncComponent from '../AsyncComponent/AsyncComponent';
+import * as ROUTES from '../../constants/routes';
+import AccountPage from '../AccountPage/AccountPage';
+import PersonalProfilePage from '../PersonalProfilePage/PersonalProfilePage';
+import ProfilePage from '../ProfilePage/ProfilePage';
 
 // import Introduction from '../Introduction/Introduction';
 // import NoEntry from '../NoEntry/NoEntry';
@@ -32,7 +36,7 @@ const PersonalChat = asyncComponent(() => import('../PersonalChat/PersonalChat')
 const PersonalChatsOverview = asyncComponent(() => import('../PersonalChatsOverview/PersonalChatsOverview'));
 const NotFound = asyncComponent(() => import('../NotFound/NotFound'));
 const RouteOfferFlowDiagram = asyncComponent(() => import('../RouteOfferFlowDiagram/RouteOfferFlowDiagram'));
-const ESStudioFeed = asyncComponent(() => import('../ESStudioFeed/ESStudioFeed'));
+
 
 class Routes extends Component {
     constructor(props) {
@@ -53,41 +57,31 @@ class Routes extends Component {
         console.log(childProps);
         return (
             <Switch>
-                {/* {this.state.userHasAuthenticated
-                    ? <div>
-                        {this.state.isAuthenticated
-                            ? <AppSplitter>
-                                <PageRoutes />
-                            </AppSplitter>
-                            : <Switch>
-                                <Route exact path="/no-entry" component={NoEntry} />
-                                <Route component={Introduction} />
-                            </Switch>}
-                    </div>
-                    : <Loading />}
-                Routes Component */}
+                <UnauthenticatedRoute exact path={ROUTES.SIGN_IN} component={Introduction} props={childProps} />
+                <UnauthenticatedRoute exact path={ROUTES.NO_ENTRY} component={NoEntry} props={childProps} />
 
-                <UnauthenticatedRoute exact path="/login" component={Introduction} props={childProps} />
-                <UnauthenticatedRoute exact path="/no-entry" component={NoEntry} props={childProps} />
+                <AuthenticatedRoute exact path={ROUTES.LANDING} component={Home} props={childProps} />
+                <AuthenticatedRoute exact path={ROUTES.ACCOUNT} component={AccountPage} props={childProps} />
+                <AuthenticatedRoute exact path={ROUTES.NEW_ROUTE} component={NewRouteOrder} props={childProps} />
+                <AuthenticatedRoute exact path={ROUTES.ROUTES_LIST} component={RoutesOffersOverview} props={childProps} />
+                <AuthenticatedRoute exact path={ROUTES.ROUTE_DETAIL} component={RouteDetail} props={childProps} />
+                <AuthenticatedRoute exact path={ROUTES.PERSONAL_CHATS_OVERVIEW} component={PersonalChatsOverview} props={childProps} />
 
-                <AuthenticatedRoute exact path="/" component={Home} props={childProps} />
-                <AuthenticatedRoute exact path="/new-route" component={NewRouteOrder} props={childProps} />
-                <AuthenticatedRoute exact path="/routes-list" component={RoutesOffersOverview} props={childProps} />
-                <AuthenticatedRoute exact path="/route/:id" component={RouteDetail} props={childProps} />
-                <AuthenticatedRoute exact path="/chats/personal" component={PersonalChatsOverview} props={childProps} />
+                <AuthenticatedRoute exact path={ROUTES.PERSONAL_PROFILE} component={PersonalProfilePage} props={childProps} />
+
                 <AuthenticatedRoute
                     exact
-                    path="/chats/public/*"
+                    path={ROUTES.PUBLIC_CHAT}
                     props={childProps}
                     component={PublicChat} />
                 <AuthenticatedRoute
                     exact
-                    path="/chats/personal/*"
+                    path={ROUTES.PERSONAL_CHAT}
                     props={childProps}
                     component={PersonalChat} />
 
+                <AppliedRoute exact path={ROUTES.PROFILE} component={ProfilePage} props={childProps} />
                 <AppliedRoute exact path="/flow/routeorder" component={RouteOfferFlowDiagram} />
-                <AppliedRoute exact path="/feeds" component={ESStudioFeed} />
                 <AppliedRoute component={NotFound} />
             </Switch>
         );

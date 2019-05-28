@@ -1,8 +1,9 @@
 // https://serverless-stack.com/chapters/code-splitting-in-create-react-app.html
 
 import React, { Component } from "react";
+import Loading from '../Loading/Loading';
 
-export default function asyncComponent(importComponent, loadingComponent = null) {
+export default function asyncComponent(importComponent, loadingComponent = Loading) {
   class AsyncComponent extends Component {
     constructor(props) {
       super(props);

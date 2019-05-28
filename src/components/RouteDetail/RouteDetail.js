@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 import styles from './RouteDetail.module.css';
-import { firebaseReady } from '../../services/authentication';
-import { Route } from 'react-router-dom';
-import firebase from 'firebase/app';
-import { Page, Card, Dialog } from 'react-onsenui';
+import firebase from '../../lib/firebase';
+import { Page, Card } from 'react-onsenui';
 import { format } from 'timeago.js';
 import ToolbarNormal from '../ToolbarNormal/ToolbarNormal';
 import Loading from '../Loading/Loading';
 import RouteInfo from '../RouteInfo/RouteInfo';
 import NewRouteOrderMapContainer from '../NewRouteOrderMapContainer/NewRouteOrderMapContainer';
 import RouteOrderDeliveryOfferOverview from '../RouteOrderDeliveryOfferOverview/RouteOrderDeliveryOfferOverview';
-import UserCard from '../UserCard/UserCard';
 import AcceptedDeliveryOffer from '../AcceptedDeliveryOffer/AcceptedDeliveryOffer';
 
 class RouteDetail extends Component {

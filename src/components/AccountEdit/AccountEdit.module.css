@@ -1,0 +1,16 @@
+
+.AccountEdit {
+    
+}
+
+.list {
+    transition: 200ms all;
+    transform: translateY(0px);
+    opacity: 1;
+}
+
+.loading {
+    transform: translateY(-200px);
+    opacity: 0;
+}
+

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Page, Card, Dialog, Button, ListItem, List, Input } from 'react-onsenui';
 import styles from './RouteDetailOfferAcceptanceDialog.module.css';
-import firebase from 'firebase/app';
+import firebase from '../../lib/firebase';
 import NotFound from '../NotFound/NotFound';
 import AuthStore from '../../stores/AuthStore';
 import UserCard from '../UserCard/UserCard';

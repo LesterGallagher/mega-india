@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import styles from './AppSplitter.module.css';
-import { Splitter, SplitterContent, SplitterSide, Page, List, ListHeader, ListItem, ListTitle } from 'react-onsenui';
+import { Splitter, SplitterContent, SplitterSide, Page, List, Icon, ListHeader, ListItem, ListTitle } from 'react-onsenui';
 import windowDimensions from 'react-window-dimensions';
 import headerBg from './edges.svg';
 import { debounce } from '../../lib/util';
 import { withRouter } from 'react-router-dom';
+import * as ROUTES from '../../constants/routes'
+import AppSplitterBanner from '../AppSplitterBanner/AppSplitterBanner';
 
 class AppSplitter extends Component {
     constructor(props) {
@@ -43,27 +45,36 @@ class AppSplitter extends Component {
             <Splitter>
                 <SplitterSide
                     side="left"
-                    width={250}
+                    width={320}
                     collapse={true}
                     animation="default"
                     isOpen={this.state.isOpen}
                     onClose={this.handleClose}>
                     <Page>
-                        <List>
+                        <List className={styles.list}>
                             <ListItem className={styles.firstListItem} style={{
                                 backgroundImage: `url('${headerBg}')`,
                                 height: 200
                             }}>
-
+                                <AppSplitterBanner />
                             </ListItem>
-                            <ListItem onClick={this.openUrl('/new-route')}>
-                                Nieuwe Route
+                            <ListItem onClick={this.openUrl(ROUTES.NEW_ROUTE)}>
+                                <Icon icon="md-mail-send" />Nieuwe Route
                             </ListItem>
-                            <ListItem onClick={this.openUrl('/routes-list')}>
-                                Bekijk Routes
+                            <ListItem onClick={this.openUrl(ROUTES.ROUTES_LIST)}>
+                                <Icon icon="md-car" />Bekijk Routes
                             </ListItem>
-                            <ListItem onClick={this.openUrl('/chats/personal')}>
-                                Chats
+                            <ListItem onClick={this.openUrl(ROUTES.PERSONAL_CHATS_OVERVIEW)}>
+                                <Icon icon="md-comment-text" />Chats
+                            </ListItem>
+                            <ListItem onClick={this.openUrl(ROUTES.FORUM)}>
+                                <Icon icon="md-comments" />Forum
+                            </ListItem>
+                            <ListItem onClick={this.openUrl(ROUTES.ACCOUNT)}>
+                                <Icon icon="md-account-o" />Account
+                            </ListItem>
+                            <ListItem onClick={this.openUrl(ROUTES.PERSONAL_PROFILE)}>
+                                <Icon icon="md-account" />Profiel
                             </ListItem>
                         </List>
                     </Page>

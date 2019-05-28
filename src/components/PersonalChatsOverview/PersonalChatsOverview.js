@@ -3,7 +3,7 @@ import { Card, Page } from 'react-onsenui';
 import './PersonalChatsOverview.css';
 import PersonalChatsList from '../PersonalChatsList/PersonalChatsList';
 import PersonalChatStore from '../../stores/PersonalChatStore';
-import { firebaseReady } from '../../services/authentication';
+import firebase from '../../lib/firebase';
 import PersonalChatListItem from '../../lib/chats/personal-chat-list-item';
 import ToolbarNormal from '../ToolbarNormal/ToolbarNormal';
 import AuthStore from '../../stores/AuthStore';
@@ -17,7 +17,7 @@ class PersonalChatsOverview extends Component {
     }
 
     componentDidMount = async () => {
-        await firebaseReady;
+        await firebase.ready;
         await AuthStore.readyPromise;
         const personalChats = await PersonalChatStore.getAllPersonalChats();
         this.setState({

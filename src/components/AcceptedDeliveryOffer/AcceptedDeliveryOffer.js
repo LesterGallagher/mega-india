@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './AcceptedDeliveryOffer.css';
 import UserCard from '../UserCard/UserCard';
-import firebase from 'firebase/app';
+import firebase from '../../lib/firebase';
 import AuthStore from '../../stores/AuthStore';
 import { Button } from 'react-onsenui';
 import * as ons from 'onsenui';

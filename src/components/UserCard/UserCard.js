@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styles from './UserCard.module.css';
 import { Page, Toolbar, Button, ToolbarButton, Icon, Card, Row, Col } from 'react-onsenui';
-import firebase from 'firebase/app';
+import firebase from '../../lib/firebase';
 import { getProfileImage } from '../../lib/user';
 
 const greyImgURI = 'data:image/png;base64,iVBORw0KGgoAAAAN'

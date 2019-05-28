@@ -10,8 +10,8 @@ import { rndId } from '../../helpers/random';
 import loaderSvg from './avatar-loader.svg'
 import { getBase64, generateThumbnail, getBuffer } from '../../lib/files';
 import { uploadProfilePicture, getDisplayName } from '../../lib/user';
-import { firebaseReady } from '../../services/authentication';
-import firebase from 'firebase/app';
+import firebase from '../../lib/firebase';
+import firebase from '../../lib/firebase';
 
 class Profile extends Component {
 

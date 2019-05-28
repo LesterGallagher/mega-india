@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import styles from './RoutesOffersOverview.module.css';
-import { firebaseReady } from '../../services/authentication';
-import firebase from 'firebase/app';
+import firebase from '../../lib/firebase';
 import * as utils from '../../lib/geo';
 import { ListItem, List, ListHeader, Page, Toolbar, Card } from 'react-onsenui';
 import ToolbarNormal from '../ToolbarNormal/ToolbarNormal';

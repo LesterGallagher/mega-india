@@ -1,0 +1,23 @@
+
+.PersonalProfilePage {
+    
+}
+
+.PersonalProfilePage :global(.page__content) {
+    top: 0!important;
+}
+
+.PersonalProfilePage :global(.toolbar) {
+    background: none;
+    box-shadow: none;
+}
+
+.PersonalProfilePage :global(.toolbar__title) {
+    color: #fff;
+}
+
+.PersonalProfilePage :global(.ons-icon) {
+    color: #fff;
+}
+
+
