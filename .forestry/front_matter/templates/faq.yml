@@ -1,6 +1,14 @@
 ---
 label: FAQ
 hide_body: true
-fields: []
+fields:
+- name: questions
+  type: blocks
+  template_types:
+  - faq-question
+  config:
+    min: 
+    max: 
+  label: Questions
 pages:
 - src/components/FAQPage/faq.json
