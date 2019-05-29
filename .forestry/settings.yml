@@ -7,7 +7,6 @@ sections:
 - type: document
   path: src/components/AboutPage/about.json
   label: Over
-  match: "**/*"
 - type: document
   path: src/components/FAQPage/faq.json
   label: FAQ
