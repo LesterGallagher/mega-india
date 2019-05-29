@@ -11,6 +11,7 @@ export const ROUTES_LIST = '/routes-list';
 export const ROUTE_DETAIL = '/route/:id';
 export const PERSONAL_CHATS_OVERVIEW = '/chats/personal';
 export const PUBLIC_CHAT = '/chats/public/*';
+export const PUBLIC_CHAT_SUBJECT_CHAT_OVERVIEW = '/chats/public-subjects/*';
 export const PERSONAL_CHAT = '/chats/personal/*';
 export const PERSONAL_PROFILE = '/profile/personal';
 export const PROFILE = '/profile/:uid';

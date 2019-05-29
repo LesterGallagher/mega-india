@@ -21,8 +21,8 @@ class NewRouteOrder extends Component {
         super(props);
         this.state = {
             fromTo: {
-                origin: 'Oosterhoutsestraat, Nederland',
-                destination: 'Bredaseweg, Breda, Nederland'
+                origin: '',
+                destination: ''
             }
         }
     }
@@ -74,11 +74,15 @@ class NewRouteOrder extends Component {
             styles.directionsInfo
         ];
 
+        console.log(this.state.fromTo, !this.state.fromTo.origin || !this.state.fromTo.destination)
+
         return (<Page renderToolbar={() => <ToolbarNormal title="Home" />}>
             <h1 style={{ margin: 10 }}>Nieuwe Route</h1>
             <Card>
                 <FromTo onChange={this.handleFromToChange} />
-                <Button onClick={this.handleShowRoute}>Bekijk route...</Button>
+                <Button
+                    disabled={!this.state.fromTo.origin && !this.state.fromTo.destination}
+                    onClick={this.handleShowRoute}>Maak route...</Button>
             </Card>
             <Card>
                 <div>
@@ -92,7 +96,8 @@ class NewRouteOrder extends Component {
                 <Card>
                     <RouteInfo directions={this.state.directions} />
 
-                    <Button onClick={this.handlePlaceRouteOrder}>Plaats Route</Button>
+                    <Button
+                        onClick={this.handlePlaceRouteOrder}>Plaats Route</Button>
                 </Card>
             </div>
         </Page>);

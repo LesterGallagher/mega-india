@@ -59,10 +59,10 @@ class AppSplitter extends Component {
                                 <AppSplitterBanner />
                             </ListItem>
                             <ListItem tappable onClick={this.openUrl(ROUTES.NEW_ROUTE)}>
-                                <Icon icon="md-mail-send" />Nieuwe Route
+                                <Icon icon="md-mail-send" />Plaats Nieuwe Route
                             </ListItem>
                             <ListItem tappable onClick={this.openUrl(ROUTES.ROUTES_LIST)}>
-                                <Icon icon="md-car" />Bekijk Routes
+                                <Icon icon="md-car" />Bekijk Aanbod
                             </ListItem>
                             <ListItem tappable onClick={this.openUrl(ROUTES.PERSONAL_CHATS_OVERVIEW)}>
                                 <Icon icon="md-comment-text" />Chats
@@ -80,10 +80,10 @@ class AppSplitter extends Component {
                                 <Icon icon="md-help" />FAQ
                             </ListItem>
                             <ListItem onClick={this.openUrl(ROUTES.SETTINGS)}>
-                                <Icon icon="md-settings" />Settings
+                                <Icon icon="md-settings" />Instellingen
                             </ListItem>
                             <ListItem tappable onClick={this.openUrl(ROUTES.ABOUT)}>
-                                <Icon icon="md-info" />About
+                                <Icon icon="md-info" />Over
                             </ListItem>
                         </List>
                     </Page>

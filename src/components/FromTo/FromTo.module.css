@@ -6,6 +6,10 @@
     text-align: center;
 }
 
+.fromTo ons-row {
+    flex-wrap: nowrap;
+}
+
 .fromTo ons-icon {
     text-align: center;
     color: primary;
@@ -17,7 +21,8 @@
 }
 
 .fromTo ons-input {
-    width: 100%;
+    width: 300px;
+    max-width: 100%;
 }
 
 .searchBar {
@@ -32,6 +37,10 @@
         display: inline-block;
         flex: none;
         margin: 10px 0;
+    }
+
+    .fromTo ons-row {
+        flex-wrap: wrap;
     }
 
     .searchBar {

@@ -43,3 +43,7 @@ code {
 .uppercase {
     text-transform: uppercase;
 }
+
+ons-page img {
+    max-width: 100%;
+}

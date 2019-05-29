@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Page, Toolbar, ToolbarButton, Icon, ProgressBar } from 'react-onsenui';
+import { Page, Toolbar, ToolbarButton, Icon, ProgressBar, BackButton } from 'react-onsenui';
+import { withRouter } from 'react-router-dom';
 import styles from './Chat.module.css';
 import MessageList from './MessageList/MessageList';
 import ChatInput from './ChatInput/ChatInput';
@@ -59,9 +60,7 @@ class Chat extends Component {
   renderToolbar = () => {
     return (<Toolbar>
       <div className="left">
-        <ToolbarButton onClick={window.toggleOnsMenu}>
-          <Icon icon="md-menu" />
-        </ToolbarButton>
+        <BackButton onClick={this.props.history.goBack}></BackButton>
       </div>
       <div className="center">
         {this.state.meta ? this.state.meta.title : 'Not Found'} Chat
@@ -101,4 +100,4 @@ class Chat extends Component {
   }
 }
 
-export default Chat;
+export default withRouter(Chat);

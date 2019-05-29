@@ -9,6 +9,7 @@ import UnauthenticatedRoute from '../UnauthenticatedRoute/UnauthenticatedRoute';
 import AuthenticatedRoute from '../AuthenticatedRoute/AuthenticatedRoute';
 import asyncComponent from '../AsyncComponent/AsyncComponent';
 import * as ROUTES from '../../constants/routes';
+import PublicChatSubjectOverview from '../PublicChatSubjectOverview/PublicChatSubjectOverview';
 
 // import Introduction from '../Introduction/Introduction';
 // import NoEntry from '../NoEntry/NoEntry';
@@ -38,6 +39,9 @@ const PersonalProfilePage = asyncComponent(() => import('../PersonalProfilePage/
 const ProfilePage = asyncComponent(() => import('../ProfilePage/ProfilePage'));
 const FAQPage = asyncComponent(() => import('../FAQPage/FAQPage'));
 const FAQQuestionPage = asyncComponent(() => import('../FAQPage/FAQQuestionPage/FAQQuestionPage'));
+const ForumPage = asyncComponent(() => import('../ForumPage/ForumPage'));
+const AboutPage = asyncComponent(() => import('../AboutPage/AboutPage'));
+const SettingsPage = asyncComponent(() => import('../SettingsPage/SettingsPage'));
 
 class Routes extends Component {
     constructor(props) {
@@ -69,7 +73,8 @@ class Routes extends Component {
                 <AuthenticatedRoute exact path={ROUTES.PERSONAL_CHATS_OVERVIEW} component={PersonalChatsOverview} props={childProps} />
 
                 <AuthenticatedRoute exact path={ROUTES.PERSONAL_PROFILE} component={PersonalProfilePage} props={childProps} />
-
+                <AuthenticatedRoute exact path={ROUTES.PUBLIC_CHAT_SUBJECT_CHAT_OVERVIEW} component={PublicChatSubjectOverview} props={childProps} />
+                
                 <AuthenticatedRoute
                     exact
                     path={ROUTES.PUBLIC_CHAT}
@@ -84,6 +89,9 @@ class Routes extends Component {
                 <AuthenticatedRoute exact path={ROUTES.PROFILE} component={ProfilePage} props={childProps} />
                 <AuthenticatedRoute exact path={ROUTES.FAQ} component={FAQPage} props={childProps} />
                 <AuthenticatedRoute exact path={ROUTES.FAQ_QUESTION} component={FAQQuestionPage} props={childProps} />
+                <AuthenticatedRoute exact path={ROUTES.SETTINGS} component={SettingsPage} props={childProps} />
+                <AuthenticatedRoute exact path={ROUTES.ABOUT} component={AboutPage} props={childProps} />
+                <AuthenticatedRoute exact path={ROUTES.FORUM} component={ForumPage} props={childProps} />
                 <AppliedRoute exact path="/flow/routeorder" component={RouteOfferFlowDiagram} />
                 <AppliedRoute component={NotFound} />
             </Switch>

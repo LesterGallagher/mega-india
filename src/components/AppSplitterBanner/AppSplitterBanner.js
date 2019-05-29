@@ -57,7 +57,8 @@ class AppSplitterBanner extends Component {
             <div className={styles.AppSplitterBanner}>
                 <img className={styles.avatar} src={this.state.profileImage} alt="Profile avatar" />
                 <div className="text-white" style={{ marginBottom: 0 }}>
-                    <b>{get(this.state.data, 'displayName')}</b>
+                    <b>{get(this.state.data, 'displayName')}</b><br />
+                    🚚{get(this.state.data, 'fName', '')}
                 </div>
             </div>
         );

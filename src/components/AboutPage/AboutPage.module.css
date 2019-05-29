@@ -1,4 +1,19 @@
 
-.AboutPage {
-    
+.textWrapper {
+    padding: 0 10px;
+}
+
+.AboutPage ons-col {
+    width: 50%;
+    flex: none;
+}
+
+.icon {
+    font-size: 5em;
+    color: #fff;
+}
+
+.text {
+    font-size: 1.3em;
+    color: #fff;
 }

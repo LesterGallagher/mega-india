@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import styles from './RouteDetail.module.css';
 import firebase from '../../lib/firebase';
@@ -9,6 +10,7 @@ import RouteInfo from '../RouteInfo/RouteInfo';
 import NewRouteOrderMapContainer from '../NewRouteOrderMapContainer/NewRouteOrderMapContainer';
 import RouteOrderDeliveryOfferOverview from '../RouteOrderDeliveryOfferOverview/RouteOrderDeliveryOfferOverview';
 import AcceptedDeliveryOffer from '../AcceptedDeliveryOffer/AcceptedDeliveryOffer';
+import UserBadge from '../UserBadge/UserBadge';
 
 class RouteDetail extends Component {
     constructor(props) {
@@ -63,7 +65,8 @@ class RouteDetail extends Component {
                     <p className={styles.fromTo}>Van {routeOrder.start_address} naar {routeOrder.end_address}</p>
                     <p className={styles.summary}>{routeOrder.summary}</p>
                     <p className={styles.description}>{routeOrder.description}</p>
-                    <p className={styles.senderName}>{routeOrder.senderName}</p>
+                    {/* <p className={styles.senderName}>{routeOrder.senderName}</p> */}
+                    <UserBadge uid={routeOrder.senderUid} />
                     <p className={styles.timestamp}>{format(routeOrder.timestamp, navigator.language || 'nl')}</p>
                 </Card>
                 <Card>
