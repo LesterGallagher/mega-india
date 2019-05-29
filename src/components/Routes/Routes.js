@@ -9,9 +9,6 @@ import UnauthenticatedRoute from '../UnauthenticatedRoute/UnauthenticatedRoute';
 import AuthenticatedRoute from '../AuthenticatedRoute/AuthenticatedRoute';
 import asyncComponent from '../AsyncComponent/AsyncComponent';
 import * as ROUTES from '../../constants/routes';
-import AccountPage from '../AccountPage/AccountPage';
-import PersonalProfilePage from '../PersonalProfilePage/PersonalProfilePage';
-import ProfilePage from '../ProfilePage/ProfilePage';
 
 // import Introduction from '../Introduction/Introduction';
 // import NoEntry from '../NoEntry/NoEntry';
@@ -36,7 +33,11 @@ const PersonalChat = asyncComponent(() => import('../PersonalChat/PersonalChat')
 const PersonalChatsOverview = asyncComponent(() => import('../PersonalChatsOverview/PersonalChatsOverview'));
 const NotFound = asyncComponent(() => import('../NotFound/NotFound'));
 const RouteOfferFlowDiagram = asyncComponent(() => import('../RouteOfferFlowDiagram/RouteOfferFlowDiagram'));
-
+const AccountPage = asyncComponent(() => import('../AccountPage/AccountPage'));
+const PersonalProfilePage = asyncComponent(() => import('../PersonalProfilePage/PersonalProfilePage'));
+const ProfilePage = asyncComponent(() => import('../ProfilePage/ProfilePage'));
+const FAQPage = asyncComponent(() => import('../FAQPage/FAQPage'));
+const FAQQuestionPage = asyncComponent(() => import('../FAQPage/FAQQuestionPage/FAQQuestionPage'));
 
 class Routes extends Component {
     constructor(props) {
@@ -80,7 +81,9 @@ class Routes extends Component {
                     props={childProps}
                     component={PersonalChat} />
 
-                <AppliedRoute exact path={ROUTES.PROFILE} component={ProfilePage} props={childProps} />
+                <AuthenticatedRoute exact path={ROUTES.PROFILE} component={ProfilePage} props={childProps} />
+                <AuthenticatedRoute exact path={ROUTES.FAQ} component={FAQPage} props={childProps} />
+                <AuthenticatedRoute exact path={ROUTES.FAQ_QUESTION} component={FAQQuestionPage} props={childProps} />
                 <AppliedRoute exact path="/flow/routeorder" component={RouteOfferFlowDiagram} />
                 <AppliedRoute component={NotFound} />
             </Switch>

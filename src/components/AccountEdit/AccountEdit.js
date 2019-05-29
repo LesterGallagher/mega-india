@@ -18,8 +18,6 @@ class AccountEdit extends Component {
     constructor(props) {
         super();
         this.state = {
-            publicData: {},
-            privateData: {},
             profileImageProgress: null,
             profileImage: getLoadingIcon(),
             loading: true
@@ -80,6 +78,7 @@ class AccountEdit extends Component {
     }
 
     updateFirebase = async () => {
+        console.log('setref', this.state.privateData);
         await this.publicUserRef.set(this.state.publicData);
         await this.privateUserRef.set(this.state.privateData);
         ons.notification.toast('Account informatie is verwerkt.', { timeout: 4000 });
@@ -88,7 +87,10 @@ class AccountEdit extends Component {
     render() {
         const { publicData, privateData, loading } = this.state;
         console.log(publicData);
-        console.log(get(publicData, 'fName', ''));
+        console.log(privateData);
+        console.log(new Date(get(privateData, 'birthDate')));
+
+        if (publicData === undefined || privateData === undefined) return null;
 
         return (
             <div className={styles.AccountEdit}>
@@ -146,8 +148,8 @@ class AccountEdit extends Component {
                             </div>
                             <div className="right">
                                 <DateInputs
-                                    onChange={date => this.changeInfo(false, 'birthDate', date)}
-                                    value={get(this, 'state.privateData.birthDate', new Date('2000'))}
+                                    onChange={date => console.log(date) || this.changeInfo(false, 'birthDate', date.getTime())}
+                                    value={new Date(get(privateData, 'birthDate', null))}
                                 />
                             </div>
                         </ListItem>

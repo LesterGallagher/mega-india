@@ -58,23 +58,32 @@ class AppSplitter extends Component {
                             }}>
                                 <AppSplitterBanner />
                             </ListItem>
-                            <ListItem onClick={this.openUrl(ROUTES.NEW_ROUTE)}>
+                            <ListItem tappable onClick={this.openUrl(ROUTES.NEW_ROUTE)}>
                                 <Icon icon="md-mail-send" />Nieuwe Route
                             </ListItem>
-                            <ListItem onClick={this.openUrl(ROUTES.ROUTES_LIST)}>
+                            <ListItem tappable onClick={this.openUrl(ROUTES.ROUTES_LIST)}>
                                 <Icon icon="md-car" />Bekijk Routes
                             </ListItem>
-                            <ListItem onClick={this.openUrl(ROUTES.PERSONAL_CHATS_OVERVIEW)}>
+                            <ListItem tappable onClick={this.openUrl(ROUTES.PERSONAL_CHATS_OVERVIEW)}>
                                 <Icon icon="md-comment-text" />Chats
                             </ListItem>
-                            <ListItem onClick={this.openUrl(ROUTES.FORUM)}>
+                            <ListItem tappable onClick={this.openUrl(ROUTES.FORUM)}>
                                 <Icon icon="md-comments" />Forum
                             </ListItem>
-                            <ListItem onClick={this.openUrl(ROUTES.ACCOUNT)}>
+                            <ListItem tappable onClick={this.openUrl(ROUTES.ACCOUNT)}>
                                 <Icon icon="md-account-o" />Account
                             </ListItem>
-                            <ListItem onClick={this.openUrl(ROUTES.PERSONAL_PROFILE)}>
+                            <ListItem tappable onClick={this.openUrl(ROUTES.PERSONAL_PROFILE)}>
                                 <Icon icon="md-account" />Profiel
+                            </ListItem>
+                            <ListItem tappable onClick={this.openUrl(ROUTES.FAQ)}>
+                                <Icon icon="md-help" />FAQ
+                            </ListItem>
+                            <ListItem onClick={this.openUrl(ROUTES.SETTINGS)}>
+                                <Icon icon="md-settings" />Settings
+                            </ListItem>
+                            <ListItem tappable onClick={this.openUrl(ROUTES.ABOUT)}>
+                                <Icon icon="md-info" />About
                             </ListItem>
                         </List>
                     </Page>

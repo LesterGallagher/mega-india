@@ -12,6 +12,9 @@ import { RouteOrder, placeRouteOrder } from '../../services/route-order';
 import { calculateRouteCostsInEuro, routeCostsColor } from '../../lib/route-costs';
 import AuthStore from '../../stores/AuthStore';
 import firebase from '../../lib/firebase';
+import { withRouter } from 'react-router-dom';
+import * as ons from 'onsenui';
+import { ROUTE_DETAIL } from '../../constants/routes';
 
 class NewRouteOrder extends Component {
     constructor(props) {
@@ -48,16 +51,21 @@ class NewRouteOrder extends Component {
     }
 
     handlePlaceRouteOrder = async () => {
-        const { distance, duration } = this.state.directions.routes[0].legs[0];
-        const cost = calculateRouteCostsInEuro(duration.value, distance.value);
+        try {
+            const { distance, duration } = this.state.directions.routes[0].legs[0];
+            const cost = calculateRouteCostsInEuro(duration.value, distance.value);
 
-        const routeOrder = new RouteOrder(this.state.directions, cost);
-        await firebase.ready;
-        if (AuthStore.isAuthenticated === false) {
-            alert('Sorry you are not logged in');
-            return;
+            const routeOrder = new RouteOrder(this.state.directions, cost);
+            await firebase.ready;
+            if (AuthStore.isAuthenticated === false) {
+                alert('Sorry you are not logged in');
+                return;
+            }
+            const doc = await placeRouteOrder(routeOrder);
+            this.props.history.push(ROUTE_DETAIL.replace(':id', doc.id));
+        } catch (err) {
+            ons.notification.alert('Kan route niet plaatsen. Foutmelding: ' + err);
         }
-        placeRouteOrder(routeOrder);
     }
 
     render() {
@@ -91,4 +99,4 @@ class NewRouteOrder extends Component {
     }
 }
 
-export default NewRouteOrder;
+export default withRouter(NewRouteOrder);

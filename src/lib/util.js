@@ -1,4 +1,5 @@
 import * as ons from 'onsenui';
+import slugify from 'slugify';
 
 export const html2text = html => {
 	return html.replace(/<style([\s\S]*?)<\/style>/gi, '')
@@ -106,13 +107,13 @@ export const logError = err => {
 };
 
 export const getParameterByName = (name, url) => {
-    if (!url) url = window.location.href;
-    name = name.replace(/[\[\]]/g, '\\$&');
-    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-        results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+	if (!url) url = window.location.href;
+	name = name.replace(/[\[\]]/g, '\\$&');
+	var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+		results = regex.exec(url);
+	if (!results) return null;
+	if (!results[2]) return '';
+	return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 
 export const throttle = (func, limit) => {
@@ -132,10 +133,17 @@ export const deviceReady = new Promise((resolve, reject) => {
 	if (window.cordova) {
 		// The deviceready event behaves somewhat differently from others. 
 		// Any event handler registered after the deviceready event fires has its callback function called immediately.
-		document.addEventListener('deviceready', resolve);	
+		document.addEventListener('deviceready', resolve);
 	} else if (window.DOMContentLoaded) {
 		resolve();
 	} else {
 		window.addEventListener('DOMContentLoaded', resolve);
 	}
 });
+
+export const slugifyURIComponent = str => {
+	return slugify(str, {
+		replacement: '-',    // replace spaces with replacement
+		lower: true          // result in lower case
+	})
+}

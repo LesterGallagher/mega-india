@@ -17,12 +17,13 @@ class AppSplitterBanner extends Component {
 
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.setState({
             isAuthenticated: AuthStore.isAuthenticated,
             userHasAuthenticated: AuthStore.userHasAuthenticated
         });
         AuthStore.on('change', this.handleAuthStoreChange);
+        if (AuthStore.isAuthenticated) this.userAuthenticated();
     }
 
     componentWillUnmount() {

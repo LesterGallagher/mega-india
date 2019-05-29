@@ -69,10 +69,6 @@ class MapsAutocompleteSearchbar extends Component {
                     float
                     placeholder={this.props.placeholder}
                     onChange={this.handleInputChange}
-                    style={{
-                        margin: '0 auto',
-                        maxWidth: 800,
-                    }}
                 />
             </div>
         );

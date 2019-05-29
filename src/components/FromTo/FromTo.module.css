@@ -1,18 +1,46 @@
-.truckIcon ons-icon {
-    font-size: 5em;
-}
+@value colors: "../../style/colors.css";
+@value primary, secondary from colors;
+
 
 .fromTo {
     text-align: center;
 }
 
+.fromTo ons-icon {
+    text-align: center;
+    color: primary;
+}
+
+.truckIcon ons-icon {
+    font-size: 5em;
+    color: secondary;
+}
+
 .fromTo ons-input {
-    min-width: 100px;
-    max-width: calc(100% - 30px);
+    width: 100%;
 }
 
 .searchBar {
     display: inline-block;
     margin-left: 3px;
 }
+
+
+@media screen and (max-width: 800px) {
+    .fromTo ons-col {
+        width: 100%;
+        display: inline-block;
+        flex: none;
+        margin: 10px 0;
+    }
+
+    .searchBar {
+        width: 100%;
+    }
+
+    .truckIcon ons-icon {
+        font-size: 3em;
+    }
+}
+
 

@@ -36,6 +36,7 @@ export class RouteOrder {
 export const placeRouteOrder = async (routeOrder) => {
     await firebase.ready;
     console.log(routeOrder);
-    firebase.firestore().collection("routeorders").add(Object.assign({}, routeOrder));
+    const ref = await firebase.firestore().collection("routeorders").add(Object.assign({}, routeOrder));
+    return await ref.get();
 }
 

@@ -15,3 +15,7 @@ export const PERSONAL_CHAT = '/chats/personal/*';
 export const PERSONAL_PROFILE = '/profile/personal';
 export const PROFILE = '/profile/:uid';
 export const FORUM = '/forum';
+export const FAQ = '/faq';
+export const FAQ_QUESTION = '/faq/:question';
+export const SETTINGS = '/settings';
+export const ABOUT = '/about';

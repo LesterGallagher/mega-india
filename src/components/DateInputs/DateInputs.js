@@ -12,7 +12,8 @@ function daysInMonth(month, year) {
 class DateInputs extends Component {
     constructor(props) {
         super();
-        const date = props.value || new Date('2000');
+        const date = props.value;
+        console.log(date);
         this.state = {
             value: {
                 day: date.getDate(),
@@ -25,7 +26,7 @@ class DateInputs extends Component {
                 year: false,
             }
         };
-
+        console.log(props, this.state);
     }
 
     componentWillMount() {
@@ -37,7 +38,7 @@ class DateInputs extends Component {
     change = key => e => {
         const newDate = Object.assign({}, this.state.value, { [key]: e.target.value.trim() });
         const warning = { day: false, month: false, year: false };
-        if (newDate.month) {
+        if (newDate.month && newDate.month !== '0') {
             newDate.month = Math.min(12, Math.max(1, +newDate.month));
         } else {
             warning.month = true;
@@ -53,10 +54,11 @@ class DateInputs extends Component {
             warning.day = true;
         }
         this.setState({ value: newDate, warning });
-        this.props.onChange(new Date(newDate.year, newDate.month, newDate.day));
+        this.props.onChange(new Date(newDate.year, newDate.month -1, newDate.day));
     }
 
     render() {
+        console.log(this.state.value);
         const day = get(this, 'state.value.day', 1);
         const month = get(this, 'state.value.month', 1);
         const year = get(this, 'state.value.year', 1860);
