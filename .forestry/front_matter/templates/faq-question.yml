@@ -1,4 +1,23 @@
 ---
 label: FAQ-Question
 hide_body: true
-fields: []
+fields:
+- name: question
+  type: text
+  config:
+    required: true
+  label: Question
+- name: answer
+  type: textarea
+  default: ''
+  config:
+    required: true
+    wysiwyg: true
+    schema:
+      format: html
+  label: Answer
+- name: auteur
+  type: text
+  config:
+    required: false
+  label: Auteur
