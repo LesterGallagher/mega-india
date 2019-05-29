@@ -14,7 +14,7 @@ fields:
     required: true
     wysiwyg: true
     schema:
-      format: html
+      format: html-blocks
   label: Answer
 - name: auteur
   type: text
