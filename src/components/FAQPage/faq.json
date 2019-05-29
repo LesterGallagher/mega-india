@@ -1,2 +1,16 @@
 {
+  "questions": [
+    {
+      "template": "faq-question",
+      "question": "Vraag 1",
+      "answer": "Antwoord 1",
+      "auteur": ""
+    },
+    {
+      "template": "faq-question",
+      "question": "Vraag 2",
+      "answer": "Antwoord 2",
+      "auteur": ""
+    }
+  ]
 }
