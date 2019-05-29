@@ -1,6 +1,10 @@
 {
   "questions": [
     {
+      "question": "Vraag 3",
+      "answer": "Antwoord 3"
+    },
+    {
       "template": "faq-question",
       "question": "Vraag 1",
       "answer": "Antwoord 1 test",
