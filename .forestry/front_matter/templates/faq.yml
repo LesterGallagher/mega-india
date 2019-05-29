@@ -5,12 +5,12 @@ fields:
 - name: questions
   type: field_group_list
   fields:
-  - name: title
+  - name: question
     type: text
     config:
       required: true
-    label: Title
-  - name: description
+    label: Question
+  - name: answer
     type: textarea
     default: ''
     config:
@@ -18,7 +18,7 @@ fields:
       wysiwyg: true
       schema:
         format: html
-    label: Description
+    label: Answer
   config:
     min: 
     max: 
