@@ -16,3 +16,5 @@ fields:
     schema:
       format: html
   label: Omschrijving
+pages:
+- src/components/AboutPage/about.json
