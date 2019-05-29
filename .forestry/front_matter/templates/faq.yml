@@ -2,3 +2,5 @@
 label: FAQ
 hide_body: true
 fields: []
+pages:
+- src/components/FAQPage/faq.json
