@@ -3,12 +3,26 @@ label: FAQ
 hide_body: true
 fields:
 - name: questions
-  type: blocks
-  template_types:
-  - faq-question
+  type: field_group_list
+  fields:
+  - name: title
+    type: text
+    config:
+      required: true
+    label: Title
+  - name: description
+    type: textarea
+    default: ''
+    config:
+      required: true
+      wysiwyg: true
+      schema:
+        format: html
+    label: Description
   config:
     min: 
     max: 
+    labelField: ''
   label: Questions
 pages:
 - src/components/FAQPage/faq.json
