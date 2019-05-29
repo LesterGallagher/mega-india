@@ -7,7 +7,7 @@ fields:
   config:
     required: true
   label: Titel
-- name: description
+- name: text
   type: textarea
   default: ''
   config:
@@ -15,6 +15,6 @@ fields:
     wysiwyg: true
     schema:
       format: html-blocks
-  label: Omschrijving
+  label: Tekst
 pages:
 - src/components/AboutPage/about.json
