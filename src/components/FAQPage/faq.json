@@ -2,7 +2,7 @@
   "questions": [
     {
       "question": "Vraag 3",
-      "answer": "Antwoord 3"
+      "answer": "<strong>Antwoord 3<br><img src=\"/uploads/logo.png\"></strong>"
     },
     {
       "template": "faq-question",
