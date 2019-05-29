@@ -18,18 +18,24 @@ class AccountEdit extends Component {
     constructor(props) {
         super();
         this.state = {
-            data: {},
+            publicData: {},
+            privateData: {},
             profileImageProgress: null,
             profileImage: getLoadingIcon(),
             loading: true
         };
 
         this.publicUserRef = props.firebase.database().ref(`/users/${AuthStore.user.uid}/public`);
+        this.privateUserRef = props.firebase.database().ref(`/users/${AuthStore.user.uid}/private`);
         props.onLoadingProgress({ indeterminate: true });
     }
 
     handlePublicUserRefChange = snapshot => {
-        this.setState({ data: snapshot.val() });
+        this.setState({ publicData: snapshot.val() || {} });
+    }
+
+    handlePrivateUserRefChange = snapshot => {
+        this.setState({ privateData: snapshot.val() || {} })
     }
 
     handleProfilePictureChange = async e => {
@@ -52,6 +58,7 @@ class AccountEdit extends Component {
     componentDidMount = async () => {
         setTimeout(() => {
             this.publicUserRef.on('value', this.handlePublicUserRefChange);
+            this.privateUserRef.on('value', this.handlePrivateUserRefChange);
         }, 0);
         const profileImage = await getProfileImage(AuthStore.user.uid);
         this.setState({ profileImage, loading: false });
@@ -62,26 +69,26 @@ class AccountEdit extends Component {
 
     }
 
-    changeInfo = (key, value) => {
+    changeInfo = (isPublic, key, value) => {
         this.props.onLoadingProgress({ indeterminate: true });
         this.setState(prevState => {
-            const { data } = prevState;
-            Object.assign(data, { [key]: value });
+            const { publicData, privateData } = prevState;
+            Object.assign(isPublic ? publicData : privateData, { [key]: value });
             return prevState;
         });
         this.props.onLoadingProgress({ });
     }
 
     updateFirebase = async () => {
-        this.setState({  })
-        await this.publicUserRef.set(this.state.data);
+        await this.publicUserRef.set(this.state.publicData);
+        await this.privateUserRef.set(this.state.privateData);
         ons.notification.toast('Account informatie is verwerkt.', { timeout: 4000 });
     };
 
     render() {
-        const { data, loading } = this.state;
-        console.log(data);
-        console.log(get(data, 'fName', ''));
+        const { publicData, privateData, loading } = this.state;
+        console.log(publicData);
+        console.log(get(publicData, 'fName', ''));
 
         return (
             <div className={styles.AccountEdit}>
@@ -96,7 +103,7 @@ class AccountEdit extends Component {
                                 <span className="list-item__subtitle">Openbaar</span>
                             </div>
                             <div className="right">
-                                <Select onChange={e => this.changeInfo('gender', e.target.value)} value={get(data, 'gender')}>
+                                <Select onChange={e => this.changeInfo(false, 'gender', e.target.value)} value={get(privateData, 'gender')}>
                                     <option value="m">Man</option>
                                     <option value="f">Vrouw</option>
                                 </Select>
@@ -112,8 +119,8 @@ class AccountEdit extends Component {
                             <div className="right">
                                 <Input type="text"
                                     minLength="2"
-                                    onChange={e => this.changeInfo('fName', e.target.value)}
-                                    value={get(data, 'fName', '')} />
+                                    onChange={e => this.changeInfo(true, 'fName', e.target.value)}
+                                    value={get(publicData, 'fName', '')} />
                             </div>
                         </ListItem>
                         <ListItem>
@@ -126,8 +133,8 @@ class AccountEdit extends Component {
                             <div className="right">
                                 <Input type="text"
                                     minLength="1"
-                                    onChange={e => this.changeInfo('lName', e.target.value)}
-                                    value={get(data, 'lName', '')} />
+                                    onChange={e => this.changeInfo(false, 'lName', e.target.value)}
+                                    value={get(privateData, 'lName', '')} />
                             </div>
                         </ListItem>
                         <ListItem>
@@ -139,8 +146,8 @@ class AccountEdit extends Component {
                             </div>
                             <div className="right">
                                 <DateInputs
-                                    onChange={date => this.changeInfo('birthDate', date)}
-                                    value={get(this, 'state.data.birthDate', new Date('2000'))}
+                                    onChange={date => this.changeInfo(false, 'birthDate', date)}
+                                    value={get(this, 'state.privateData.birthDate', new Date('2000'))}
                                 />
                             </div>
                         </ListItem>
@@ -153,8 +160,8 @@ class AccountEdit extends Component {
                             </div>
                             <div className="right">
                                 <Input type="text"
-                                    onChange={e => this.changeInfo('postalCode', e.target.value)}
-                                    value={get(data, 'postalCode', '')} />
+                                    onChange={e => this.changeInfo(false, 'postalCode', e.target.value)}
+                                    value={get(privateData, 'postalCode', '')} />
                             </div>
                         </ListItem>
                         <ListItem>
@@ -166,8 +173,8 @@ class AccountEdit extends Component {
                             </div>
                             <div className="right">
                                 <Input
-                                    onChange={e => this.changeInfo('tel', e.target.value)}
-                                    value={get(data, 'tel', '')}
+                                    onChange={e => this.changeInfo(false, 'tel', e.target.value)}
+                                    value={get(privateData, 'tel', '')}
                                     type="text" />
                             </div>
                         </ListItem>
@@ -185,7 +192,7 @@ class AccountEdit extends Component {
                                 <label htmlFor="profile-pic">
                                     <Button modifier="outline">
                                         Uploaden
-                                        </Button>
+                                    </Button>
                                 </label>
                                 <Input onChange={this.handleProfilePictureChange} inputId="profile-pic" style={{ display: 'none' }} type="file" accept="image/*" />
                             </div>
@@ -199,8 +206,8 @@ class AccountEdit extends Component {
                             </div>
                             <div className="right">
                                 <textarea
-                                    onChange={e => this.changeInfo('description', e.target.value)}
-                                    value={get(data, 'description', '')}
+                                    onChange={e => this.changeInfo(true, 'description', e.target.value)}
+                                    value={get(publicData, 'description', '')}
                                     className="textarea textarea--transparent"
                                     rows="8"
                                     placeholder="Gebruik dit veld om iets te vertellen over jezelf. Noem bijvoorbeeld je hobby's en waarom je gebruik maakt van deze website. Let op: bescherm je eigen privacy. Vermeld geen achternaam of contactgegevens."></textarea>
@@ -215,8 +222,8 @@ class AccountEdit extends Component {
                             </div>
                             <div className="right">
                                 <textarea
-                                    onChange={e => this.changeInfo('experience', e.target.value)}
-                                    value={get(data, 'experience', '')}
+                                    onChange={e => this.changeInfo(true, 'experience', e.target.value)}
+                                    value={get(publicData, 'experience', '')}
                                     className="textarea textarea--transparent"
                                     rows="4"
                                     placeholder="Heb je relevante (werk)ervaring die van belang kan zijn, vermeld deze dan hier."></textarea>
@@ -232,8 +239,8 @@ class AccountEdit extends Component {
                             </div>
                             <div className="right">
                                 <Switch
-                                    onChange={e => this.changeInfo('vog', e.target.checked)}
-                                    checked={get(data, 'vog', false)} />
+                                    onChange={e => this.changeInfo(true, 'vog', e.target.checked)}
+                                    checked={get(publicData, 'vog', false)} />
                             </div>
                         </ListItem>
                         <ListTitle>Gegevens Opslaan</ListTitle>

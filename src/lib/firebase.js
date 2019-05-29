@@ -1,8 +1,10 @@
-import firebase from 'firebase/app';
+import app from 'firebase/app';
+
 import 'firebase/auth';
 import 'firebase/database';
 import 'firebase/firestore';
 import 'firebase/storage';
+import { deviceReady } from './util';
 
 // Initialize Firebase
 var config = {
@@ -13,7 +15,23 @@ var config = {
     storageBucket: "megaindia-990a4.appspot.com",
     messagingSenderId: "429451926912"
 };
-firebase.initializeApp(config);
-firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
 
-export default firebase;
+const ready = async self => {
+    await app.auth().setPersistence(app.auth.Auth.Persistence.LOCAL)
+    await deviceReady;
+    return self;
+}
+
+class Firebase {
+    constructor() {
+        app.initializeApp(config);
+        this.auth = app.auth;
+        this.database = app.database;
+        this.firestore = app.firestore;
+        this.storage = app.storage;
+        this.ready = ready(this);
+    }
+
+}
+
+export default new Firebase();

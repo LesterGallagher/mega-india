@@ -1,9 +1,9 @@
 import { EventEmitter } from "events";
-import { authenticate, getCurrentUser, isLoggedIn, firebaseReady } from "../services/authentication";
+import { authenticate, getCurrentUser, isLoggedIn } from "../services/authentication";
 import { getProfileImage } from "../lib/user";
 import UserStore from "./UserStore";
-import firebase from 'firebase/app';
 import ons from 'onsenui';
+import firebase from '../lib/firebase';
 
 class AuthStore extends EventEmitter {
     constructor() {
@@ -56,7 +56,7 @@ class AuthStore extends EventEmitter {
 
     signInWithGoogle = async () => {
         try {
-            const firebase = await firebaseReady();
+            const firebase = await firebase.ready();
             const provider = new firebase.auth.GoogleAuthProvider();
             firebase.auth().signInWithRedirect(provider)
         } catch(error) {
@@ -80,7 +80,7 @@ class AuthStore extends EventEmitter {
         this.emit('change', { action: 'GET_USER' });
     }
 
-    authenticate = (provider) => authenticate(provider).then(async user => {
+    authenticate = provider => authenticate(provider).then(async user => {
         if (!user) console.warn('user is falsy after authenticating...', user);
         this.isAuthenticated = true;
         this.user = user;
@@ -91,7 +91,7 @@ class AuthStore extends EventEmitter {
 
     getUserInfo = async () => {
         if (this.userDataObserver) this.userDataObserver.off();
-        await firebaseReady;
+        await firebase.ready;
         this.photoURL = await getProfileImage(this.user.uid);
         this.userDataObserver = firebase.database().ref(`/users/${this.user.uid}`)
         const userDataExists = await UserStore.checkIfUserDataExists(this.user.uid);

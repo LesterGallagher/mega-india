@@ -1,6 +1,6 @@
-import { firebaseReady } from '../services/authentication';
 import AuthStore from "../stores/AuthStore";
 import { getDisplayName } from "../lib/user";
+import firebase from '../lib/firebase';
 
 const getLatAndLngFromGMapsFuncs = obj => {
     return {
@@ -34,7 +34,7 @@ export class RouteOrder {
 }
 
 export const placeRouteOrder = async (routeOrder) => {
-    const firebase = await firebaseReady;
+    await firebase.ready;
     console.log(routeOrder);
     firebase.firestore().collection("routeorders").add(Object.assign({}, routeOrder));
 }

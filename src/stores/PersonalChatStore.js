@@ -1,9 +1,9 @@
 import { EventEmitter } from "events";
-import { firebaseReady } from "../services/authentication";
 import { ChatMeta } from "../lib/chats/chat-meta";
 import { ChatThread } from "../lib/chats/chat-thread";
 import AbstractChatStore from "./AbstractChatStore";
 import AuthStore from "./AuthStore";
+import firebase from '../lib/firebase';
 
 class PersonalChatStore extends AbstractChatStore {
     constructor() {
@@ -29,13 +29,13 @@ class PersonalChatStore extends AbstractChatStore {
     }
 
     getField = async (id, key) => {
-        const firebase = await firebaseReady;
+        await firebase.ready;
         const snapshot = await firebase.database().ref(`/chats/personal/${id}/${key}`).once('value');
         return snapshot.val();
     }
 
     getSingleChatMeta = async (id) => {
-        await firebaseReady;
+        await firebase.ready;
         const [title, slug, isLeaf] = await Promise.all(
             ['title', 'slug', 'isLeaf'].map(key => this.getField(id, key))
         );
@@ -57,7 +57,7 @@ class PersonalChatStore extends AbstractChatStore {
     }
 
     getChatsMetas = async () => {
-        await firebaseReady;
+        await firebase.ready;
         const ids = await this.getChatMetaIds();
         return await Promise.all(ids.map(this.getSingleChatMeta));
     };
@@ -77,14 +77,14 @@ class PersonalChatStore extends AbstractChatStore {
     getChatThread = async chatMeta => {
         if (chatMeta === null) throw new Error('Invalid chat meta');
         if (this.threads[chatMeta.id]) return this.threads[chatMeta.id];
-        const firebase = await firebaseReady;
+        await firebase.ready;
         const chatThread = ChatThread.fromChatMeta(chatMeta, firebase.database().ref(`/chats/personal/${chatMeta.id}/thread`));
         this.threads[chatMeta.id] = chatThread;
         return chatThread;
     };
 
     getAllPersonalChats = async () => {
-        const firebase = await firebaseReady;
+        await firebase.ready;
         await AuthStore.readyPromise;
         const loggedIn = AuthStore.isAuthenticated;
         if (!loggedIn) return null;
@@ -100,7 +100,7 @@ class PersonalChatStore extends AbstractChatStore {
     }
 
     trySetChatToUserData = async (otherUserUid) => {
-        const firebase = await firebaseReady;
+        await firebase.ready;
         await AuthStore.readyPromise;
         const loggedIn = AuthStore.isAuthenticated;
         if (!loggedIn) return false;

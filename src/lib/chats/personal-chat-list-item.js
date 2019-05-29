@@ -1,4 +1,4 @@
-import firebase from 'firebase/app';
+import firebase from '../../lib/firebase';
 
 export default class PersonalChatListItem {
     constructor(uid, blocked, userPublicData) {

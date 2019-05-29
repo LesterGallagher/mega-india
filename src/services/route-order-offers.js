@@ -1,4 +1,4 @@
-import firebase from 'firebase/app';
+import firebase from '../lib/firebase';
 import AuthStore from '../stores/AuthStore';
 import { getDisplayName } from '../lib/user';
 import PersonalChatStore from '../stores/PersonalChatStore';

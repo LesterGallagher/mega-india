@@ -1,5 +1,5 @@
 import { EventEmitter } from "events";
-import { firebaseReady } from "../services/authentication";
+import firebase from '../lib/firebase';
 
 class UserStore extends EventEmitter {
     constructor() {
@@ -8,7 +8,7 @@ class UserStore extends EventEmitter {
 
     checkIfUserDataExists = uid => {
         return new Promise((resolve, reject) => {
-            firebaseReady.then(firebase => {
+            firebase.ready.then(firebase => {
                 const ref = firebase.database().ref(`/users/${uid}`);
                 ref.once('value', function (snapshot) {
                     return resolve(snapshot.val() !== null);

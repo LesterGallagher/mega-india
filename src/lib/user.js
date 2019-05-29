@@ -1,9 +1,14 @@
-import { firebaseReady } from '../services/authentication';
 import AuthStore from "../stores/AuthStore";
 import defaultAvatar from '../images/img_avatar.png';
+import loadingIcon from '../images/loading.svg';
+import firebase from '../lib/firebase';
+
+export const getDefaultAvatar = () => defaultAvatar;
+
+export const getLoadingIcon = () => loadingIcon;
 
 export const getProfileImage = async userUid => {
-    const firebase = await firebaseReady;
+    await firebase.ready;
     try {
         const ref = await firebase.storage().ref('/users/' + userUid + '/profile-picture.jpg')
         const url = await ref.getDownloadURL();
@@ -31,7 +36,7 @@ export const getProfileImage = async userUid => {
  */
 export const uploadProfilePicture = (userUid, file, onProgress) => {
     return new Promise((resolve, reject) => {
-        firebaseReady.then(firebase => {
+        firebase.ready.then(firebase => {
 
             const ref = firebase.storage().ref(`/users/${userUid}/profile-picture.jpg`)
             const uploadTask = ref.put(file, { contentType: 'image/jpeg' });
@@ -45,9 +50,9 @@ export const uploadProfilePicture = (userUid, file, onProgress) => {
                     reject(error);
                 }, function () {
                     uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
-                        resolve(downloadURL);
                         AuthStore.setPhotoURL(downloadURL);
                         console.log('File available at', downloadURL);
+                        resolve(downloadURL);
                     });
                 });
         });

@@ -1,7 +1,7 @@
-import { firebaseReady } from "../services/authentication";
 import { ChatMeta } from "../lib/chats/chat-meta";
 import { ChatThread } from "../lib/chats/chat-thread";
 import AbstractChatStore from "./AbstractChatStore";
+import firebase from '../lib/firebase';
 
 class PublicChatStore extends AbstractChatStore {
     constructor() {
@@ -29,14 +29,14 @@ class PublicChatStore extends AbstractChatStore {
     }
 
     getField = async (id, key) => {
-        const firebase = await firebaseReady;
+        await firebase.ready;
         console.log(firebase);
         const snapshot = await firebase.database().ref(`/chats/public/${id}/${key}`).once('value');
         return snapshot.val();
     }
 
     getSingleChatMeta = async (id) => {
-        await firebaseReady;
+        await firebase.ready;
         const [title, slug, isLeaf] = await Promise.all(
             ['title', 'slug', 'isLeaf'].map(key => this.getField(id, key))
         );
@@ -44,7 +44,7 @@ class PublicChatStore extends AbstractChatStore {
     }
 
     getChatsMetas = async () => {
-        await firebaseReady;
+        await firebase.ready;
         const ids = await this.getChatMetaIds();
         return await Promise.all(ids.map(this.getSingleChatMeta));
     };
@@ -64,7 +64,7 @@ class PublicChatStore extends AbstractChatStore {
     getChatThread = async chatMeta => {
         if (chatMeta === null) throw new Error('Invalid chatmeta');
         if (this.threads[chatMeta.id]) return this.threads[chatMeta.id];
-        const firebase = await firebaseReady;
+        const firebase = await firebase.ready;
         const chatThread = ChatThread.fromChatMeta(chatMeta, firebase.database().ref(`/chats/public/${chatMeta.id}/thread`));
         this.threads[chatMeta.id] = chatThread;
         return chatThread;  

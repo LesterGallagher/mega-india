@@ -45,7 +45,7 @@ class AppSplitter extends Component {
             <Splitter>
                 <SplitterSide
                     side="left"
-                    width={320}
+                    width={300}
                     collapse={true}
                     animation="default"
                     isOpen={this.state.isOpen}

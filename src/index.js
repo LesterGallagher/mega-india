@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
 import asyncComponent from './components/AsyncComponent/AsyncComponent';
 import Loading from './components/Loading/Loading';
-import './index.css';
+import './style';
 const App = asyncComponent(() => import('./components/App/App'), Loading);
 
 ReactDOM.render(<App />, document.getElementById('root'));
