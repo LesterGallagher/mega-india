@@ -18,6 +18,11 @@ file_template: ":filename:"
 build:
   preview_command: npm run build
   publish_command: npm run deploy
+  preview_env:
+  - JEKYLL_ENV=staging
   publish_env:
   - JEKYLL_ENV=production
+  preview_output_directory: _site
   output_directory: build
+  instant_preview_command: bundle exec jekyll serve --drafts --unpublished --future
+    --port 8080 --host 0.0.0.0 -d _site
