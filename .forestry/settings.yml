@@ -7,7 +7,6 @@ sections:
 - type: document
   path: src/components/FAQPage/faq.json
   label: FAQ
-  match: "**/*"
 - type: directory
   path: public/data
   label: Documenten
