@@ -4,13 +4,17 @@
       "template": "faq-question",
       "question": "Vraag 1",
       "answer": "Antwoord 1",
-      "auteur": ""
+      "auteur": "",
+      "title": "Vraag 1",
+      "description": "Antwoord 1"
     },
     {
       "template": "faq-question",
       "question": "Vraag 2",
       "answer": "Antwoord 2",
-      "auteur": ""
+      "auteur": "",
+      "title": "Vraag 2",
+      "description": "Antwoord 2"
     }
   ]
 }
