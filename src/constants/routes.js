@@ -20,3 +20,11 @@ export const FAQ = '/faq';
 export const FAQ_QUESTION = '/faq/:question';
 export const SETTINGS = '/settings';
 export const ABOUT = '/about';
+export const FIND_COURIER = '/find-courier';
+export const MY_ROUTE_ORDERS = '/my-route-orders'
+export const MY_DELIVERIES = '/my-deliveries'
+
+
+
+
+

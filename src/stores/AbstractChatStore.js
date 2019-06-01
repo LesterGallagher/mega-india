@@ -10,7 +10,7 @@ export default class AbsctractChatStore extends EventEmitter {
                 t = t.sub.find(child => child.slug === path[i]);
             }
             const newSlug = path[path.length - 1];
-            t.sub.push(new ChatSubject(subject.title, newSlug, t, subject.isLeaf, subject.id));
+            t.sub.push(new ChatSubject(subject.title, newSlug, t, subject.isLeaf, subject.objectID));
         } catch (err) {
             throw new Error('Invalid Graph!', err);
         }

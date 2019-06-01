@@ -7,15 +7,20 @@ export const getDefaultAvatar = () => defaultAvatar;
 
 export const getLoadingIcon = () => loadingIcon;
 
+const profileImages = {}; // CACHE
+
 export const getProfileImage = async userUid => {
+    if (userUid in profileImages) return profileImages[userUid].url; // CACHE
     await firebase.ready;
     try {
         const ref = await firebase.storage().ref('/users/' + userUid + '/profile-picture.jpg')
         const url = await ref.getDownloadURL();
+        profileImages[userUid] = { url, _t: Date.now() }; // CACHE
         return url;
     } catch (err) {
         // most likely 404.
         // resolve this with the default avatar url
+        profileImages[userUid] = { url: defaultAvatar, _t: Date.now() }; // CACHE
         return defaultAvatar;
     }
 }
@@ -44,14 +49,12 @@ export const uploadProfilePicture = (userUid, file, onProgress) => {
                 function (snapshot) {
                     // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
                     var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                    console.log('Upload is ' + progress + '% done');
                     if (onProgress) onProgress(progress, snapshot.bytesTransferred, snapshot.totalBytes);
                 }, function (error) {
                     reject(error);
                 }, function () {
                     uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
                         AuthStore.setPhotoURL(downloadURL);
-                        console.log('File available at', downloadURL);
                         resolve(downloadURL);
                     });
                 });

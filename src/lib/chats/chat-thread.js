@@ -1,8 +1,8 @@
 import { ChatMeta } from "./chat-meta";
 
 export class ChatThread extends ChatMeta {
-    constructor(title, slug, id, isLeaf, threadObserver) {
-        super(title, isLeaf, slug, id);
+    constructor(title, slug, objectID, isLeaf, threadObserver) {
+        super(title, isLeaf, slug, objectID);
         this.threadObserver = threadObserver;
     }
 
@@ -10,7 +10,7 @@ export class ChatThread extends ChatMeta {
         return new ChatThread(
             chatMeta.title,
             chatMeta.slug,
-            chatMeta.id,
+            chatMeta.objectID,
             chatMeta.isLeaf,
             threadObserver);
     }

@@ -22,6 +22,10 @@ body {
 }
 
 
+h6 {
+    margin: 5px 0;
+}
+
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
@@ -46,4 +50,12 @@ code {
 
 ons-page img {
     max-width: 100%;
+}
+
+.m10, h5.m10, h6.m10 {
+    margin: 10px;
+}
+
+.text-center {
+    text-align: center;
 }

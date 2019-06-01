@@ -10,7 +10,7 @@ const getLatAndLngFromGMapsFuncs = obj => {
 }
 
 export class RouteOrder {
-    constructor(mapsResult, cost) {
+    constructor(mapsResult, cost, title, description, receiverUid = null, state = RouteOrder.STATES.INITIAL, acceptedRouteOrderOfferId = null, transportMethods = [], dateTime = new Date()) {
         const route = mapsResult.routes[0];
         const { summary, legs, overview_polyline } = route;
         const { distance, duration,
@@ -28,14 +28,25 @@ export class RouteOrder {
         this.senderUid = AuthStore.user.uid;
         this.timestamp = new Date().getTime();
         this.senderName = getDisplayName(AuthStore.user);
-        this.description = 'Test description';
-        this.title = 'Test title';
+        this.description = title;
+        this.title = description;
+        this.receiverUid = receiverUid;
+        this.state = state;
+        this.acceptedRouteOrderOfferId = acceptedRouteOrderOfferId;
+        this.transportMethods = transportMethods;
+        this.dateTime = dateTime.getTime();
+    }
+
+    static STATES = {
+        INITIAL: 'INITIAL',
+        PICKED_UP: 'PICKED_UP',
+        DONE: 'DONE',
+        COMPLETE: 'COMPLETE'
     }
 }
 
 export const placeRouteOrder = async (routeOrder) => {
     await firebase.ready;
-    console.log(routeOrder);
     const ref = await firebase.firestore().collection("routeorders").add(Object.assign({}, routeOrder));
     return await ref.get();
 }

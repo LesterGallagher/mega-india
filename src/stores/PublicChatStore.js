@@ -14,7 +14,6 @@ class PublicChatStore extends AbstractChatStore {
 
     init = async () => {
         this.chatMeta = await this.getChatsMetas();
-        console.log(this.chatMeta);
         this.isReady = true;
         this.emit('change');
     }
@@ -31,7 +30,6 @@ class PublicChatStore extends AbstractChatStore {
 
     getField = async (id, key) => {
         await firebase.ready;
-        console.log(firebase);
         const snapshot = await firebase.database().ref(`/chats/public/${id}/${key}`).once('value');
         return snapshot.val();
     }
@@ -80,10 +78,10 @@ class PublicChatStore extends AbstractChatStore {
 
     getChatThread = async chatMeta => {
         if (chatMeta === null) throw new Error('Invalid chatmeta');
-        if (this.threads[chatMeta.id]) return this.threads[chatMeta.id];
+        if (this.threads[chatMeta.objectID]) return this.threads[chatMeta.objectID];
         await firebase.ready;
-        const chatThread = ChatThread.fromChatMeta(chatMeta, firebase.database().ref(`/chats/public/${chatMeta.id}/thread`));
-        this.threads[chatMeta.id] = chatThread;
+        const chatThread = ChatThread.fromChatMeta(chatMeta, firebase.database().ref(`/chats/public/${chatMeta.objectID}/thread`));
+        this.threads[chatMeta.objectID] = chatThread;
         return chatThread;  
     };
 }

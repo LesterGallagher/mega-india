@@ -69,7 +69,6 @@ class AuthStore extends EventEmitter {
     }
 
     getUser = async () => {
-        console.log('get user');
         const user = await getCurrentUser();
         if (!user) console.warn('user is falsy after getting the current user...', user);
         const loggedIn = await isLoggedIn();

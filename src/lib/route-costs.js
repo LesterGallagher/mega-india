@@ -7,7 +7,7 @@ export const calculateRouteCostsInEuro = (durationInSeconds, distanceInMeters) =
 
 export const routeCostsColor = euros => {
     const range = Math.min(1, Math.max(0, Math.log10(10 + euros) / 1.5 - 1));
-    return toHexWithPercentage(range, 1 - range, 0);
+    return toHexWithPercentage(1 - range, range, 0);
 }
 
 

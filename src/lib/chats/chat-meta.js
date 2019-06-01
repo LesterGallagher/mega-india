@@ -1,10 +1,9 @@
-import firebase from '../../lib/firebase';
 
 export class ChatMeta {
-    constructor(title, isLeaf, slug, id) {
+    constructor(title, isLeaf, slug, objectID) {
         this.title = title;
         this.isLeaf = isLeaf;
         this.slug = slug;
-        this.id = id;
+        this.objectID = objectID;
     }
 }
