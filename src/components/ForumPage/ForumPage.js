@@ -41,7 +41,7 @@ class ForumPage extends Component {
     render() {
         return (
             <Page className={styles.ForumPage} renderToolbar={this.renderToolbar}>
-                <h2 style={{ marginLeft: 10 }}>Onderwerpen</h2>
+                <h5 style={{ marginLeft: 10 }}>Onderwerpen</h5>
                 {/* <Card style={{ padding: 0 }}>
                     <PublicChatsList publicChatPromises={this.state.publicChatPromises} />
                 </Card> */}

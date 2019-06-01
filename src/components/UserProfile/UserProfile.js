@@ -11,8 +11,6 @@ import AuthStore from '../../stores/AuthStore';
 import { withRouter } from 'react-router-dom';
 import { PERSONAL_PROFILE, ACCOUNT } from '../../constants/routes';
 
-console.log(colors);
-
 class UserProfile extends Component {
     constructor(props) {
         super();
@@ -22,7 +20,6 @@ class UserProfile extends Component {
         };
 
         const { uid, firebase } = props;
-        console.log(firebase);
 
         this.publicDataRef = firebase.database().ref(`/users/${uid}/public`);
     }
@@ -74,7 +71,6 @@ class UserProfile extends Component {
         const { uid } = this.props;
         const { profileImage, data } = this.state;
 
-        console.log(data)
         return (
             <div className={styles.UserProfile}>
 

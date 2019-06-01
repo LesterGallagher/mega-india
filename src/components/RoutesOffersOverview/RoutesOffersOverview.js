@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import styles from './RoutesOffersOverview.module.css';
-import firebase from '../../lib/firebase';
 import * as utils from '../../lib/geo';
 import { ListItem, List, ListHeader, Page, Toolbar, Card } from 'react-onsenui';
 import ToolbarNormal from '../ToolbarNormal/ToolbarNormal';
 import RoutesList from '../RoutesList/RoutesList';
+import { withFirebase } from '../Firebase/context';
 
 class RoutesOffersOverview extends Component {
     constructor(props) {
         super();
         this.state = {
         };
-
     }
 
     /**
@@ -34,11 +33,11 @@ class RoutesOffersOverview extends Component {
         const box = utils.boundingBoxCoordinates(area.center, area.radius);
 
         // construct the GeoPoints
-        const lesserGeopoint = new firebase.firestore.GeoPoint(box.swCorner.latitude, box.swCorner.longitude);
-        const greaterGeopoint = new firebase.firestore.GeoPoint(box.neCorner.latitude, box.neCorner.longitude);
+        const lesserGeopoint = new this.props.firebase.firestore.GeoPoint(box.swCorner.latitude, box.swCorner.longitude);
+        const greaterGeopoint = new this.props.firebase.firestore.GeoPoint(box.neCorner.latitude, box.neCorner.longitude);
 
         // construct the Firestore query
-        let query = firebase.firestore().collection('routeorders')
+        let query = this.props.firebase.firestore().collection('routeorders')
             .where('start_location', '>', lesserGeopoint)
             .where('start_location', '<', greaterGeopoint)
             .orderBy("timestamp");
@@ -58,7 +57,7 @@ class RoutesOffersOverview extends Component {
             return allLocs;
         } catch (err) {
             console.error(err);
-            return new Error('Error while retrieving events');
+            throw new Error('Error while retrieving events');
         };
     }
 
@@ -70,7 +69,7 @@ class RoutesOffersOverview extends Component {
     }
 
     getRouteOrders = async () => {
-        let query = firebase.firestore().collection('routeorders')
+        let query = this.props.firebase.firestore().collection('routeorders')
             .orderBy("timestamp");
 
         try {
@@ -78,13 +77,13 @@ class RoutesOffersOverview extends Component {
             const allLocs = []; // used to hold all the loc data
             snapshot.forEach((loc) => {
                 const data = loc.data();
-                data.id = loc.id;
+                data.objectID = loc.id;
                 allLocs.push(data);
             });
             return allLocs;
         } catch (err) {
             console.error(err);
-            return new Error('Error while retrieving events');
+            throw new Error('Error while retrieving events');
         };
     }
 
@@ -96,10 +95,9 @@ class RoutesOffersOverview extends Component {
     }
 
     render() {
-        console.log(this.state.routesList);
         return (
             <Page className="RoutesOffersOverview" renderToolbar={() => <ToolbarNormal name="Route lijst" />}>
-                <h2 style={{ margin: 10 }}>Laatste routes</h2>
+                <h5 style={{ margin: 10 }}>Laatste routes</h5>
                 <Card style={{ padding: 0}}>
                     <List>
                         <RoutesList routesList={this.state.routesList || []} />
@@ -110,4 +108,4 @@ class RoutesOffersOverview extends Component {
     }
 }
 
-export default RoutesOffersOverview;
+export default withFirebase(RoutesOffersOverview);

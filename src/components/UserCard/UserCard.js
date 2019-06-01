@@ -13,7 +13,6 @@ class UserCard extends Component {
         super();
         this.state = {
         };
-        console.log('prroooos', props);
     }
 
     componentDidMount = async () => {

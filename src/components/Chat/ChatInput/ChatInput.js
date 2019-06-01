@@ -27,7 +27,6 @@ class ChatInput extends Component {
             senderUid: AuthStore.user.uid,
             timestamp: Date.now()
         };
-        console.log(newMessage, this.props.threadObserver);
         this.props.threadObserver.push(newMessage);
         this.setState({
             text: ''

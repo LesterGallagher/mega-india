@@ -22,16 +22,15 @@ class RouteOrderDeliveryOfferOverview extends Component {
     renderYouveMadeThisOffer = () => {
         return (
             <div>
-                <h2>
+                <h5>
                     <Icon style={{ backgroundColor: '#0c0', padding: 5, color: '#fff' }}
-                        icon="fa-check" /> Jij hebt deze route geplaatst.</h2>
+                        icon="fa-check" /> Jij hebt deze route geplaatst.</h5>
             </div>
         )
     }
 
     render() {
         const routeOrder = this.props.routeOrder;
-        console.log(routeOrder, AuthStore.user);
         return (
             <div className="RouteOrderDeliveryOfferOverview">
                 <RouteOrderDeliveryOffers routeOrder={routeOrder} />

@@ -51,7 +51,6 @@ class FAQPage extends Component {
                         <ListTitle>Vragen</ListTitle>
                         {faq.questions.map(({ question, author }, key) => {
                             const url = FAQ_QUESTION.replace(':question', slugifyURIComponent(question));
-                            console.log(question, url);
                             return (
                                 <ListItem key={key} tappable onClick={this.openUrl(url)}>
                                     <div className="center">

@@ -64,7 +64,6 @@ class Profile extends Component {
     handleProfilePic = async e => {
         const file = e.target.files[0];
         if (!file) return;
-        console.log(file);
         this.setState({
             photoURL: loaderSvg,
             progress: 0
@@ -77,7 +76,6 @@ class Profile extends Component {
             thumbnailBuffer,
             this.handleUploadProgress
         );
-        console.log('test', photoURL);
         this.setState({
             photoURL: photoURL,
             progress: null
@@ -96,7 +94,6 @@ class Profile extends Component {
         this.setState({ editDisplayNameDialogOpen: false });
         const uid = AuthStore.user.uid;
         const userRef = firebase.database().ref(`/users/${uid}`);
-        console.log(userRef);
         const displayNameRef = userRef.child('/displayName');
         displayNameRef.set(this.state.newUsername);
         this.setState({ newUsername: '' });
@@ -126,12 +123,12 @@ class Profile extends Component {
                                 id={randomId} type="file" />
                         </label>
                     </div>
-                    <h3 className={styles.displayName}>
+                    <h5 className={styles.displayName}>
                         {displayName}&nbsp;&nbsp;
                         <Fab modifier="mini" onClick={() => this.setState({ editDisplayNameDialogOpen: true })}>
                             <Icon icon="md-edit" />
                         </Fab>
-                    </h3>
+                    </h5>
                 </div>
                 <div className={styles.cardWrapper}>
                     <Card>

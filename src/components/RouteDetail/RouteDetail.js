@@ -11,11 +11,14 @@ import NewRouteOrderMapContainer from '../NewRouteOrderMapContainer/NewRouteOrde
 import RouteOrderDeliveryOfferOverview from '../RouteOrderDeliveryOfferOverview/RouteOrderDeliveryOfferOverview';
 import AcceptedDeliveryOffer from '../AcceptedDeliveryOffer/AcceptedDeliveryOffer';
 import UserBadge from '../UserBadge/UserBadge';
+import UserPublicDataProvider, { withUserPublicData } from '../UserPublicDataProvider/UserPublicDataProvider';
+
+const UserBadgeWithPublicData = withUserPublicData(UserBadge);
 
 class RouteDetail extends Component {
     constructor(props) {
         super(props);
-        this.id = props.match.params.id;
+        this.objectID = props.match.params.id;
         this.state = {
             acceptanceDialog: false
         };
@@ -24,13 +27,13 @@ class RouteDetail extends Component {
     componentDidMount = async () => {
         this.unsubscribe = firebase.firestore()
             .collection('routeorders')
-            .doc(this.id)
+            .doc(this.objectID)
             .onSnapshot(this.onSnapshot);
     }
 
     onSnapshot = doc => {
         const data = doc.data();
-        data.id = doc.id;
+        data.objectID = doc.id;
         this.setState({
             routeOrder: data
         });
@@ -43,12 +46,12 @@ class RouteDetail extends Component {
             travelMode: window.google.maps.TravelMode.DRIVING
         }, (result, status) => {
             if (status == window.google.maps.DirectionsStatus.OK) {
-                console.log(result);
                 this.setState({ directions: result });
             } else {
                 window.alert('Directions request failed due to ' + status);
             }
         });
+
     }
 
     componentWillUnmount() {
@@ -60,13 +63,15 @@ class RouteDetail extends Component {
         const routeOrder = this.state.routeOrder;
         return (
             <Page renderToolbar={() => <ToolbarNormal name={routeOrder.title} />}>
-                <h2 style={{ margin: 10 }}>Route</h2>
+                <h5 style={{ margin: 10 }}>Route</h5>
                 <Card>
                     <p className={styles.fromTo}>Van {routeOrder.start_address} naar {routeOrder.end_address}</p>
                     <p className={styles.summary}>{routeOrder.summary}</p>
                     <p className={styles.description}>{routeOrder.description}</p>
                     {/* <p className={styles.senderName}>{routeOrder.senderName}</p> */}
-                    <UserBadge uid={routeOrder.senderUid} />
+                    <UserPublicDataProvider uid={routeOrder.senderUid}>
+                        <UserBadgeWithPublicData />
+                    </UserPublicDataProvider>
                     <p className={styles.timestamp}>{format(routeOrder.timestamp, navigator.language || 'nl')}</p>
                 </Card>
                 <Card>
@@ -76,8 +81,19 @@ class RouteDetail extends Component {
                         directions={this.state.directions} />
                 </Card>
                 <Card>
-                    <RouteInfo directions={this.state.directions} />
+                    <RouteInfo readOnly cost={routeOrder.cost} directions={this.state.directions} />
                 </Card>
+                {routeOrder.receiverUid
+                    ? <div>
+                        <h5 className={styles.m10}>Ontvanger</h5>
+                        <Card>
+                            <UserPublicDataProvider uid={routeOrder.receiverUid}>
+                                <UserBadgeWithPublicData />
+                            </UserPublicDataProvider>
+                        </Card>
+                    </div>
+                    : null}
+
                 {routeOrder.acceptedRouteOrderOfferId
                     ? <AcceptedDeliveryOffer routeOrder={routeOrder} />
                     : <Card>

@@ -36,7 +36,7 @@ class PublicChatSubjectOverview extends Component {
         const slug = this.props.match.params[0];
         return (
             <Page className={styles.ForumPage} renderToolbar={this.renderToolbar}>
-                <h2 style={{ marginLeft: 10 }}>Chats overzicht</h2>
+                <h5 style={{ marginLeft: 10 }}>Chats overzicht</h5>
                 {/* <Card style={{ padding: 0 }}>
                     <PublicChatsList publicChatPromises={this.state.publicChatPromises} />
                 </Card> */}

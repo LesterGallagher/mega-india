@@ -6,6 +6,7 @@ import { ListItem, List, ListHeader, ListTitle, Icon, Fab } from 'react-onsenui'
 import config from '../../config';
 import { format } from 'timeago.js';
 import { withRouter } from 'react-router-dom';
+import RouteBadge from '../RouteBadge/RouteBadge';
 
 class RoutesList extends Component {
     constructor(props) {
@@ -15,29 +16,10 @@ class RoutesList extends Component {
         };
     }
 
-    handleClick = routeOrder => e => {
-        this.props.history.push('/route/' + routeOrder.id);
-    }
-
     renderItem = (routeOrder, key) => {
-        const url = `https://maps.googleapis.com/maps/api/staticmap?size=200x130
-            &path=enc%3A${encodeURIComponent(routeOrder.overview_polyline)}
-            &key=${config.googleMapsAPIKey}`.replace(/\s/g, '');
         return (
-            <ListItem tappable key={key} className={styles.listItem} onClick={this.handleClick(routeOrder)}>
-                <div className="left">
-                    <img className={styles.image} src={url} alt="Route thumbnail" />
-                </div>
-                <div className={'center ' + styles.center}>
-                    <div>
-                        <h3 className={styles.title}>{routeOrder.title}</h3>
-                        <p className={styles.fromTo}>Van {routeOrder.start_address} naar {routeOrder.end_address}</p>
-                        <p className={styles.summary}>{routeOrder.summary}</p>
-                        <p className={styles.description}>{routeOrder.description}</p>
-                        <p className={styles.senderName}>{routeOrder.senderName}</p>
-                        <p className={styles.timestamp}>{format(routeOrder.timestamp, navigator.language || 'nl')}</p>
-                    </div>
-                </div>
+            <ListItem tappable key={key} className={styles.listItem}>
+                <RouteBadge routeOrder={routeOrder} />
             </ListItem>
         )
     }
@@ -45,7 +27,9 @@ class RoutesList extends Component {
     render() {
         return (
             <div className="RoutesList">
-                {(this.props.routesList || []).map(this.renderItem)}
+                {(this.props.routesList || []).length === 0
+                    ? <h5>Nothing here...</h5>
+                    : (this.props.routesList || []).map(this.renderItem)}
             </div>
         );
     }

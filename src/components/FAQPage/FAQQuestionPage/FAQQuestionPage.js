@@ -13,7 +13,6 @@ class FAQQuestionPage extends Component {
         this.state = {
         };
 
-        console.log(props);
         this.question = questions[props.match.params.question || props.question];
     }
 

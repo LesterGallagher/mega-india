@@ -13,12 +13,12 @@ import Routes from '../Routes/Routes';
 import 'onsenui/css/onsenui.css';
 import FirebaseContext from '../Firebase';
 import firebase from '../../lib/firebase';
-import { registerLocale, setDefaultLocale } from 'react-datepicker';
 import nl from 'date-fns/locale/nl'
+import moment from 'moment';
+moment.locale('nl');
 
 ons.platform.select('android');
 register('nl', nlLocale);
-console.log('nl test', nl);
 
 
 class App extends Component {
@@ -57,8 +57,6 @@ class App extends Component {
       isAuthenticated: this.state.isAuthenticated,
       userHasAuthenticated: this.state.userHasAuthenticated
     };
-
-    console.log('child props', childProps);
 
     return (
       <div className="App">

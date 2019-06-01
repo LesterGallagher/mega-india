@@ -5,6 +5,7 @@ import firebase from '../../lib/firebase';
 import AuthStore from '../../stores/AuthStore';
 import { Button } from 'react-onsenui';
 import * as ons from 'onsenui';
+import { RouteOrder } from '../../services/route-order';
 
 class AcceptedDeliveryOffer extends Component {
     constructor(props) {
@@ -17,6 +18,7 @@ class AcceptedDeliveryOffer extends Component {
     componentDidMount() {
         const { routeOrder } = this.props;
         const { acceptedRouteOrderOfferId } = routeOrder;
+        console.log(acceptedRouteOrderOfferId);
         this.unsubscribe = firebase.firestore()
             .collection('routeordersoffers')
             .doc(acceptedRouteOrderOfferId)
@@ -29,7 +31,7 @@ class AcceptedDeliveryOffer extends Component {
 
     onSnapshot = snapshot => {
         const routeOrderOffer = snapshot.data();
-        routeOrderOffer.id = snapshot.id;
+        routeOrderOffer.objectID = snapshot.id;
         this.setState({
             routeOrderOffer: routeOrderOffer
         })
@@ -41,14 +43,13 @@ class AcceptedDeliveryOffer extends Component {
         });
         if (!result) return;
 
-        const routeOrderOffer = this.state.routeOrderOffer;
-        console.log(routeOrderOffer);
+        const routeOrder = this.props.routeOrder;
 
         await firebase.firestore()
-            .collection('routeordersoffers')
-            .doc(routeOrderOffer.id)
+            .collection('routeorders')
+            .doc(routeOrder.objectID)
             .update({
-                done: true
+                state: RouteOrder.STATES.DONE
             });
     }
 
@@ -58,14 +59,13 @@ class AcceptedDeliveryOffer extends Component {
         });
         if (!result) return;
 
-        const routeOrderOffer = this.state.routeOrderOffer;
-        console.log(routeOrderOffer);
+        const routeOrder = this.props.routeOrder;
 
         await firebase.firestore()
-            .collection('routeordersoffers')
-            .doc(routeOrderOffer.id)
+            .collection('routeorders')
+            .doc(routeOrder.objectID)
             .update({
-                pickedUp: true
+                state: RouteOrder.STATES.PICKED_UP
             });
     }
 
@@ -81,13 +81,12 @@ class AcceptedDeliveryOffer extends Component {
         if (!result) return;
 
         const routeOrder = this.props.routeOrder;;
-        console.log(routeOrder);
 
         await firebase.firestore()
             .collection('routeorders')
-            .doc(routeOrder.id)
+            .doc(routeOrder.objectID)
             .update({
-                complete: true
+                state: RouteOrder.STATES.DONE
             });
     }
 
@@ -96,15 +95,15 @@ class AcceptedDeliveryOffer extends Component {
         const routeOrder = this.props.routeOrder;
         const isMyOffer = routeOrderOffer && routeOrderOffer.senderUid === AuthStore.user.uid;
         const isMyOrder = routeOrder && routeOrder.senderUid === AuthStore.user.uid;
-        const isPickedUp = routeOrderOffer && routeOrderOffer.pickedUp
-        const isDone = routeOrderOffer && routeOrderOffer.done;
-        const isComplete = routeOrder && routeOrder.complete;
+        const isPickedUp = routeOrder && routeOrder.state === 'PICKED_UP'
+        const isDone = routeOrder && routeOrder.state === 'DONE'
+        const isComplete = routeOrder && routeOrder.state === 'COMPLETE'
 
         return (
             <div className="AcceptedDeliveryOffer">
                 {isMyOffer
                     ? <div>
-                        <h3 style={{ margin: 10 }}>Jij bent de aangewezen bezorger!</h3>
+                        <h5 style={{ margin: 10 }}>Jij bent de aangewezen bezorger!</h5>
                         {routeOrderOffer && <div>
                             <UserCard uid={routeOrderOffer.senderUid}></UserCard>
                             <div style={{ margin: 10 }}>
@@ -138,7 +137,7 @@ class AcceptedDeliveryOffer extends Component {
                     </div>
                     : isMyOrder
                         ? <div>
-                            <h3 style={{ margin: 10 }}>Je hebt de volgende gebruiker aangegeven als bezorger:</h3>
+                            <h5 style={{ margin: 10 }}>Je hebt de volgende gebruiker aangegeven als bezorger:</h5>
                             {routeOrderOffer && <div>
                                 <UserCard uid={routeOrderOffer.senderUid}></UserCard>
                                 <div style={{ margin: 10 }}>
@@ -166,7 +165,7 @@ class AcceptedDeliveryOffer extends Component {
                             </div>}
                         </div>
                         : <div>
-                            <h3 style={{ margin: 10 }}>Aangewezen bezorger:</h3>
+                            <h5 style={{ margin: 10 }}>Aangewezen bezorger:</h5>
                             {routeOrderOffer && <div>
                                 <UserCard uid={routeOrderOffer.senderUid}></UserCard>
                                 <div style={{ margin: 10 }}>

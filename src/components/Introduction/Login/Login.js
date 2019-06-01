@@ -52,7 +52,7 @@ class Login extends Component {
                     <img className={styles.img} src={image} alt="Login" />
                 </div>
                 <Card className={styles.card}>
-                    <h3 className={styles.title}>Login/Registreren</h3>
+                    <h5 className={styles.title}>Login/Registreren</h5>
                     <p>&nbsp;</p>
                     <MyEmailLoginButton onClick={this.mailAuthenticate}>Login/Registreren met Email</MyEmailLoginButton>
                     <div style={{ padding: 1 }}></div>

@@ -1,0 +1,69 @@
+
+.RouteBadge {
+    
+}
+
+.imgCol {
+    flex: none;
+    margin-right: 5px;
+    width: auto;
+    display: flex;
+}
+
+.imgCol img {
+    flex: 1 0;
+    align-self: center;
+}
+
+
+.title {
+
+}
+.fromTo {
+
+}
+.description {
+
+}
+.senderName {
+
+}
+.summary {
+}
+.timestamp {
+    position: absolute;
+    right: 3px;
+    bottom: 3px;
+}
+
+.badge h3 {
+    color: #018ee8;;
+    margin: 3px;
+    margin-bottom: 10px;
+}
+
+.badge p {
+    margin: 3px;
+}
+
+.center {
+    padding-left: 10px;
+    flex: 1;
+}
+
+.image {
+
+}
+
+.right {
+}
+
+.right ons-fab {
+    background: #018ee8;
+
+}
+
+.right ons-icon {
+    color: #fff;
+    font-size: 1.2em;
+}

@@ -78,7 +78,6 @@ class AccountEdit extends Component {
     }
 
     updateFirebase = async () => {
-        console.log('setref', this.state.privateData);
         await this.publicUserRef.set(this.state.publicData);
         await this.privateUserRef.set(this.state.privateData);
         ons.notification.toast('Account informatie is verwerkt.', { timeout: 4000 });
@@ -86,9 +85,6 @@ class AccountEdit extends Component {
 
     render() {
         const { publicData, privateData, loading } = this.state;
-        console.log(publicData);
-        console.log(privateData);
-        console.log(new Date(get(privateData, 'birthDate')));
 
         if (publicData === undefined || privateData === undefined) return null;
 
@@ -148,7 +144,7 @@ class AccountEdit extends Component {
                             </div>
                             <div className="right">
                                 <DateInputs
-                                    onChange={date => console.log(date) || this.changeInfo(false, 'birthDate', date.getTime())}
+                                    onChange={date => this.changeInfo(false, 'birthDate', date.getTime())}
                                     value={new Date(get(privateData, 'birthDate', null))}
                                 />
                             </div>

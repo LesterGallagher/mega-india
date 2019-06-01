@@ -13,7 +13,6 @@ class DateInputs extends Component {
     constructor(props) {
         super();
         const date = props.value;
-        console.log(date);
         this.state = {
             value: {
                 day: date.getDate(),
@@ -26,7 +25,6 @@ class DateInputs extends Component {
                 year: false,
             }
         };
-        console.log(props, this.state);
     }
 
     componentWillMount() {
@@ -58,12 +56,10 @@ class DateInputs extends Component {
     }
 
     render() {
-        console.log(this.state.value);
         const day = get(this, 'state.value.day', 1);
         const month = get(this, 'state.value.month', 1);
         const year = get(this, 'state.value.year', 1860);
 
-        console.log(day);
         return (
             <div className={styles.DateInputs}>
                 <Input

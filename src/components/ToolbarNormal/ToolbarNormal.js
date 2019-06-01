@@ -13,7 +13,6 @@ class ToolbarNormal extends Component {
     }
 
     render = () => {
-        
         return (<Toolbar>
             <div className="left">
                 <ToolbarButton onClick={this.handleMenuClick} className="menu-toolbar-btn">

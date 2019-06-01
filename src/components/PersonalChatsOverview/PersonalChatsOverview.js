@@ -22,7 +22,7 @@ class PersonalChatsOverview extends Component {
         const personalChats = await PersonalChatStore.getAllPersonalChats();
         this.setState({
             personalChatPromises: personalChats.map(chatInfo => PersonalChatListItem.create(chatInfo))
-        }, console.log);
+        });
     }
 
     componentWillUnmount() {
@@ -31,8 +31,8 @@ class PersonalChatsOverview extends Component {
     render() {
         return (
             <Page className="PersonalChatsOverview" renderToolbar={() => <ToolbarNormal name="Chats overzicht" />}>
-                <h2 style={{ marginLeft: 10 }}>Chats overzicht</h2>
                 <Card style={{ padding: 0 }}>
+                    <h5 style={{ marginLeft: 10 }}>Chats overzicht</h5>
                     <PersonalChatsList personalChatPromises={this.state.personalChatPromises} />
                 </Card>
             </Page>

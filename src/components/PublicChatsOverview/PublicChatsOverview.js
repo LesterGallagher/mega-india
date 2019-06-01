@@ -28,7 +28,6 @@ class PublicChatsOverview extends Component {
         const globalChatSubjects = await PublicChatStore.getChatSubjectsFlat();
         const path = this.props.path.trim().replace(/(^\/|\/$)/, '');
         const chatSubjects = globalChatSubjects.filter(x => x.slug.startsWith(path) && x.slug !== path);
-        console.log(globalChatSubjects);
         this.setState({ chatSubjects });
     }
 

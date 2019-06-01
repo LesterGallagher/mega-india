@@ -17,7 +17,6 @@ class RouteDetailOfferAcceptanceDialog extends Component {
         super(props);
         this.state = {
         };
-        console.log('prps', props);
     }
 
     componentDidMount = async () => {
@@ -30,9 +29,9 @@ class RouteDetailOfferAcceptanceDialog extends Component {
         const { routeOrder, routeOrderOffer } = this.props;
         await firebase.firestore()
             .collection('routeorders')
-            .doc(routeOrder.id)
+            .doc(routeOrder.objectID)
             .update({
-                acceptedRouteOrderOfferId: routeOrderOffer.id,
+                acceptedRouteOrderOfferId: routeOrderOffer.objectID,
             });
         notifyDeliveryGuyAccepted(routeOrder, routeOrderOffer);
     }
@@ -71,7 +70,6 @@ class RouteDetailOfferAcceptanceDialog extends Component {
     }
 
     render() {
-        console.log(this.props);
         return (
             <div>
                 <Dialog onCancel={this.onCancel}

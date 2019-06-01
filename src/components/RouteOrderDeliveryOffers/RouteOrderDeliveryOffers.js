@@ -27,12 +27,12 @@ class RouteOrderDeliveryOffers extends Component {
 
     initWithRouteOrderId = () => {
         this.unsubscribeRouteOrderOffersObserver = firebase.firestore().collection('routeordersoffers')
-            .where('routeOrderId', '==', this.props.routeOrder.id)
+            .where('routeOrderId', '==', this.props.routeOrder.objectID)
             .onSnapshot((querySnapshot) => {
                 const offers = [];
                 querySnapshot.forEach(function (doc) {
                     const data = doc.data();
-                    data.id = doc.id;
+                    data.objectID = doc.id;
                     offers.push(data);
                 });
                 this.setState({ offers });

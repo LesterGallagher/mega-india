@@ -2,7 +2,14 @@
 .PageBanner {
     min-height: 220px;
     position: relative;
-    background-size: cover;
+    background-size: 130%;
+    animation: zoomIn 2000ms ease-out;
+    background-position: center center;
+}
+
+@keyframes zoomIn {
+    from { background-size: 100%; }
+    to { background-size: 130%; }
 }
 
 .bannerContent, .PageBannerColorOverlay {

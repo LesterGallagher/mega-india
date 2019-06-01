@@ -22,11 +22,11 @@ class PageBanner extends Component {
                 <div className={styles.PageBannerColorOverlay} style={{ backgroundColor: colors.secondary }} />
                 <div className={styles.bannerContent}>
                     <div className={styles.title}>
-                        <h4>{title}</h4>
+                        <h5>{title || <span>&nbsp;</span>}</h5>
                     </div>
                     {avatar
                         ? <div>
-                            <img className={styles.avatar} src={avatar} alt="Avatar" height={100} />
+                            <img className={styles.avatar} src={avatar} alt="Avatar" height={100} width={100} />
                         </div>
                         : null}
                     {renderFab()}

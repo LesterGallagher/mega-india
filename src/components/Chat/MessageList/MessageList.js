@@ -75,7 +75,7 @@ class MessageList extends Component {
         const name = msg.inline || msg.isSelf ? null : msg.senderName;
         const jsx = (
             <Message
-                key={msg.id}
+                key={msg.objectID}
                 name={name}
                 position={msg.isSelf ? 'right' : 'left'}
                 timestamp={msg.timestamp}

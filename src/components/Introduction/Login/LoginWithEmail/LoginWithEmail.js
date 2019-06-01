@@ -54,7 +54,7 @@ class LoginWithEmail extends Component {
                         <img className={styles.img} src={image} alt="Login" />
                     </div>
                     <Card className={styles.card}>
-                        <h3 className={styles.title}>{this.state.register ? 'Registeren' : 'Inloggen'}</h3>
+                        <h5 className={styles.title}>{this.state.register ? 'Registeren' : 'Inloggen'}</h5>
                         <p>&nbsp;</p>
                         <Input
                             inputId={this.randEmailId}

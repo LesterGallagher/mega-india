@@ -30,7 +30,6 @@ export class NewRouteOrderMapContainer extends Component {
     };
 
     render = () => {
-        console.log(' rerender ', this.props);
         return (
             <GoogleMap
                 defaultZoom={8}

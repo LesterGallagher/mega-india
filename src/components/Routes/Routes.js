@@ -10,6 +10,9 @@ import AuthenticatedRoute from '../AuthenticatedRoute/AuthenticatedRoute';
 import asyncComponent from '../AsyncComponent/AsyncComponent';
 import * as ROUTES from '../../constants/routes';
 import PublicChatSubjectOverview from '../PublicChatSubjectOverview/PublicChatSubjectOverview';
+import FindCourierPage from '../FindCourierPage/FindCourierPage';
+import MyDeliveriesPage from '../MyDeliveriesPage/MyDeliveriesPage';
+import MyRouteOrdersPage from '../MyRouteOrdersPage/MyRouteOrdersPage';
 
 // import Introduction from '../Introduction/Introduction';
 // import NoEntry from '../NoEntry/NoEntry';
@@ -59,7 +62,6 @@ class Routes extends Component {
 
     render() {
         const { childProps } = this.props;
-        console.log(childProps);
         return (
             <Switch>
                 <UnauthenticatedRoute exact path={ROUTES.SIGN_IN} component={Introduction} props={childProps} />
@@ -74,6 +76,9 @@ class Routes extends Component {
 
                 <AuthenticatedRoute exact path={ROUTES.PERSONAL_PROFILE} component={PersonalProfilePage} props={childProps} />
                 <AuthenticatedRoute exact path={ROUTES.PUBLIC_CHAT_SUBJECT_CHAT_OVERVIEW} component={PublicChatSubjectOverview} props={childProps} />
+                <AuthenticatedRoute exact path={ROUTES.FIND_COURIER} component={FindCourierPage} props={childProps} />
+                <AuthenticatedRoute exact path={ROUTES.MY_DELIVERIES} component={MyDeliveriesPage} props={childProps} />
+                <AuthenticatedRoute exact path={ROUTES.MY_ROUTE_ORDERS} component={MyRouteOrdersPage} props={childProps} />
                 
                 <AuthenticatedRoute
                     exact
