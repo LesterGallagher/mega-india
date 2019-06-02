@@ -13,7 +13,7 @@ export const getProfileImage = async userUid => {
     if (userUid in profileImages) return profileImages[userUid].url; // CACHE
     await firebase.ready;
     try {
-        const ref = await firebase.storage().ref('/users/' + userUid + '/profile-picture.jpg')
+        const ref = await firebase.storage().ref('/users/' + userUid + '/thumb@256_profile-picture.jpg')
         const url = await ref.getDownloadURL();
         profileImages[userUid] = { url, _t: Date.now() }; // CACHE
         return url;
@@ -54,8 +54,9 @@ export const uploadProfilePicture = (userUid, file, onProgress) => {
                     reject(error);
                 }, function () {
                     uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
-                        AuthStore.setPhotoURL(downloadURL);
-                        resolve(downloadURL);
+                        const blob = window.URL.createObjectURL(file);
+                        AuthStore.setPhotoURL(blob);
+                        resolve(blob);
                     });
                 });
         });
