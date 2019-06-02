@@ -12,7 +12,10 @@ class Home extends Component {
     render() {
         const toolbar = <ToolbarNormal title="Home" />;
         return (<Page renderToolbar={() => toolbar}>
-            <Link to={'/nieuwe-route'}><Button>Nieuwe route!</Button></Link>
+            <div className="m10">
+                <h2>Disclaimer!</h2>
+                <p>Dit is preview versie {process.env.REACT_APP_VERSION}</p>
+            </div>
         </Page>);
     }
 }
